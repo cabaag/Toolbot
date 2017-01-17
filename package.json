@@ -1,0 +1,77 @@
+{
+  "name": "toolbot",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Set of tools for help developers to manage, update, upgrade their projects and find help.",
+  "keywords": [
+    "electron",
+    "toolbox",
+    "toolbot",
+    "manage",
+    "git",
+    "dependencies"
+  ],
+  "scripts": {
+    "tslint": "tslint -c ./tslint.json \"./src/**/*.ts\" -e \"./src/**/typings.d.ts\" -e \"./src/environments/**\"",
+    "ngbuild": "rm -rf ./dist && ng build",
+    "npm-install": "npm --prefix ./dist install ./dist --production",
+    "build": "gulp copy",
+    "package": "npm run ngbuild && npm run build && npm run npm-install && node './node_modules/electron-packager/cli.js' dist ToolBot --icon=src/app/assets/ico/icon.icns --out=dist-app --overwrite",
+    "live-reload": "gulp watch"
+  },
+  "engines": {
+    "node": ">4.4 < 7",
+    "npm": ">3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabaag/ToolBot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cabaag/ToolBot/issues"
+  },
+  "homepage": "https://github.com/cabaag/ToolBot#readme",
+  "license": "MIT",
+  "author": "Carlos Barranco <caba9313@gmail.com>",
+  "dependencies": {
+    "@angular/common": "2.4.1",
+    "@angular/compiler": "2.4.1",
+    "@angular/core": "2.4.1",
+    "@angular/forms": "2.4.1",
+    "@angular/http": "2.4.1",
+    "@angular/material": "2.0.0-beta.1",
+    "@angular/platform-browser": "2.4.1",
+    "@angular/platform-browser-dynamic": "2.4.1",
+    "@angular/platform-server": "2.4.1",
+    "@angular/router": "3.4.1",
+    "@covalent/core": "0.10.2",
+    "@covalent/charts": "0.10.2",
+    "@covalent/dynamic-forms": "0.10.2",
+    "@covalent/highlight": "0.10.2",
+    "@covalent/http": "0.10.2",
+    "@covalent/markdown": "0.10.2"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "2.4.1",
+    "@types/hammerjs": "^2.0.30",
+    "@types/jasmine": "^2.2.31",
+    "@types/node": "^6.0.34",
+    "@types/selenium-webdriver": "^2.52.0",
+    "angular-cli": "1.0.0-beta.24",
+    "codelyzer": "~0.0.26",
+    "awesome-typescript-loader": "^2.2.4",
+    "ember-cli-inject-live-reload": "1.4.0",
+    "gulp": "3.9.1",
+    "gulp-help": "1.6.1",
+    "require-dir": "0.3.0",
+    "sass-loader": "^4.0.2",
+    "semver": "5.2.0",
+    "ts-node": "1.2.1",
+    "tslint": "^3.15.1",
+    "typescript": "2.0.10",
+    "electron": "^1.4.13",
+    "electron-packager": "^8.1.0",
+    "electron-connect": "^0.6.1",
+    "run-sequence": "^1.2.2"
+  }
+}

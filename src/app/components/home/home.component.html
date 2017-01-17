@@ -1,0 +1,115 @@
+<div layout="column" layout-fill>
+    <div flex class="content md-content">
+        <md-sidenav-container fullscreen class="td-layout-manage-list md-content" flex layout="row">
+            <md-sidenav opened="true" align="start" mode="side" class="md-sidenav-left md-whiteframe-z1">
+                <div layout="column">
+                    <div flex layout="column">
+                        <div layout="row" layout-align="start center" class="draggable bgc-grey-900">
+                            <span flex></span>
+                            <button md-icon-button><md-icon>sort</md-icon></button>
+                            <button md-icon-button><md-icon>settings</md-icon></button>
+                            <button md-icon-button><md-icon>more_vert</md-icon></button>
+                        </div>
+                        <div flex layout="row">
+                            <div flex="none" class="bgc-dark-grey-B15">
+                                <md-button-toggle-group vertical #group="mdButtonToggleGroup">
+                                    <md-button-toggle value="files" mdTooltip="File Browser" mdTooltipPosition="after" checked="true">
+                                        <md-icon class="push-top push-bottom">folder_open</md-icon>
+                                    </md-button-toggle>
+                                    <md-button-toggle value="data" mdTooltip="Data Sources" mdTooltipPosition="after">
+                                        <md-icon class="push-top push-bottom">storage</md-icon>
+                                    </md-button-toggle>
+                                    <md-button-toggle value="right" mdTooltip="Filters" mdTooltipPosition="after">
+                                        <md-icon class="push-top push-bottom">filter_tilt_shift</md-icon>
+                                    </md-button-toggle>
+                                    <md-button-toggle value="justify" mdTooltip="Cloud Connections" mdTooltipPosition="after">
+                                        <md-icon class="push-top push-bottom">filter_drama</md-icon>
+                                    </md-button-toggle>
+                                </md-button-toggle-group>
+                            </div>
+                            <div flex layout="column" class="md-content">
+                                <td-file-select (openFile)="monaco.value = $event"></td-file-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="td-layout-footer bgc-black pad-xs" layout="row">
+                        <button md-icon-button><md-icon>add</md-icon></button>
+                        <span flex></span>
+                        <button md-icon-button><md-icon>refresh</md-icon></button>
+                    </div>
+                </div>
+            </md-sidenav>
+            <md-sidenav #preview align="end" mode="side" class="md-sidenav-right md-whiteframe-z1">
+                <div layout="column">
+                    <div flex layout="column">
+                        <div layout="row" layout-align="start center" class="draggable bgc-grey-900">
+                            <button md-icon-button (click)="preview.close()" mdTooltip="Close Preview" mdTooltipPosition="after"><md-icon>close</md-icon></button>
+                            <span class="md-subhead push-left-sm">Preview</span>
+                            <span flex></span>
+                            <button md-icon-button><md-icon>more_vert</md-icon></button>
+                        </div>
+                        <div layout="column" layout-margin class="md-content">
+                            No Preview Available
+                        </div>
+                    </div>
+                    <div class="td-layout-footer bgc-black pad-xs" layout="row">
+                        <button md-icon-button><md-icon>file_download</md-icon></button>
+                        <span flex></span>
+                        <button md-icon-button><md-icon>refresh</md-icon></button>
+                    </div>
+                </div>
+            </md-sidenav>
+            <div layout="column" flex layout-fill>
+                <div flex layout="column">
+                    <div flex layout="column">
+                        <div layout="row" layout-align="start center" class="draggable bgc-grey-900">
+                            <span flex class="text-center md-caption">Covalent Electron</span>
+                            <button md-icon-button (click)="preview.toggle()" mdTooltip="Toggle Preview" mdTooltipPosition="before"><md-icon>remove_red_eye</md-icon></button>
+                            <button md-icon-button [mdMenuTriggerFor]="moreMenu"><md-icon>more_vert</md-icon></button>
+                            <md-menu #moreMenu="mdMenu" x-position="before">
+                                <button md-menu-item (click)="saveEditorValue(monaco)">Get Editor Content</button>
+                                <button md-menu-item (click)="monaco.value = 'console.log()'">Set Content to console.log</button>
+                                <button md-menu-item (click)="monaco.language = 'sql'">Set Editor language to SQL</button>
+                                <button md-menu-item (click)="registerCustomLanguage(monaco)">Use custom Language</button>
+                                <md-divider></md-divider>
+                                <button md-menu-item> Settings </button>
+                            </md-menu>
+                        </div>
+                        <td-monaco-editor #monaco theme="vs-dark" flex class="bgc-grey-900 overflow-hidden" editorStyle="border:0;" editorLanguage="javascript"></td-monaco-editor>
+                    </div>
+                </div>
+                <div class="td-layout-footer bgc-black pad-xs">
+                    <div layout="row" layout-align="start center">
+                        <span class="push-left">
+                            <md-icon class="text-md">description</md-icon>
+                            <span>local/my queries/filename.sql</span>
+                        </span>
+                        <span flex></span>
+                        <span class="push-left">
+                            <md-icon class="text-md">warning</md-icon>
+                            <span>8</span>
+                        </span>
+                        <span class="push-left">
+                            <md-icon class="text-md">error</md-icon>
+                            <span>2</span>
+                        </span>
+                    </div>
+                </div>
+                <md-divider></md-divider>
+            </div>
+        </md-sidenav-container>
+    </div>
+    <div class="td-layout-footer pad-sm">
+        <div layout="row" layout-align="start center">
+            <span class="tc-green-600">
+                <md-icon class="text-md">check</md-icon>
+                <span>No Issues</span>
+            </span>
+            <span flex></span>
+            <span class="push-left tc-blue-600">
+                <md-icon class="text-md">system_update_alt</md-icon>
+                <span>2 Updates</span>
+            </span>
+        </div>
+    </div>
+</div>

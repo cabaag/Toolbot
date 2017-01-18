@@ -7,7 +7,7 @@ var path = require('path');
 gulp.task('copy', 'Copy the electron files', function() {
   return gulp
     .src(config.paths.electronrequiredfiles, {
-      base: "."
+      base: '.'
     })
     .pipe(gulp.dest(function(file) {
       // Doing a bunch of chopping up of the paths to get it to copy
@@ -21,7 +21,7 @@ gulp.task('copy', 'Copy the electron files', function() {
       // Git rid of the filename from the path
       var splitPath = filePath.split('/');
       filePath = splitPath.slice(2).join('/');
-      filePath = filePath.substring(0, filePath.lastIndexOf("/"));
+      filePath = filePath.substring(0, filePath.lastIndexOf('/'));
       // Now override the filepath to only be the name
       file.path = path.basename(file.path);
       // Return back the Path we chopped up above

@@ -1,5 +1,19 @@
+@import '~@angular/material/core/theming/all-theme';
+@include md-core();
+$primary: md-palette($md-grey, 900);
+$accent: md-palette($md-orange, 800, A100, A400);
 :host /deep/ {
-    md-sidenav .cdk-focus-trap-content > * {
-        height: 100%;
+  .projects-card .project {
+    .projectLetter {
+      text-transform: uppercase;
+      background-color: md-color($accent);
+      color: md-color($accent, default-contrast);
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
     }
+  }
 }

@@ -1,11 +1,12 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss']
 })
-export class HomeComponent implements AfterViewInit {
+export class ProjectsComponent implements OnInit {
+  listView: boolean = true;
   projects = [{
     image: undefined,
     name: 'FlexboxLayout',
@@ -19,9 +20,12 @@ export class HomeComponent implements AfterViewInit {
     name: 'ToolBot',
     description: 'Set of tools for help developers to manage, update, upgrade their projects and find help.'
   }];
-  constructor() {}
+  constructor() { }
 
-  ngAfterViewInit(): void {
-    // do Something
+  ngOnInit() {
+  }
+
+  changeView(view: string): void {
+    this.listView = view === 'list';
   }
 }

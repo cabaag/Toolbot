@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<td-layout #layout sidenavTitle="ToolBot" logo="assets:toolbot">
+  <md-nav-list menu-items>
+    <a *ngFor="let item of routes" md-list-item [routerLink]="[item.route]" (click)="layout.close()">
+      <md-icon>{{item.icon}}</md-icon>
+      {{item.title}}
+    </a>
+  </md-nav-list>
+  <td-layout-nav toolbarTitle="ToolBot" logo="assets:toolbot">
+    <router-outlet></router-outlet>
+    <td-layout-footer>
+      Footer
+    </td-layout-footer>
+  </td-layout-nav>
+</td-layout>

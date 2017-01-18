@@ -3,9 +3,17 @@
 var gulp = require('gulp');
 var spawn = require('child_process').spawn;
 var runSequence = require('run-sequence');
-var electron = require('electron-connect').server.create();
+var electron = require('electron-connect').server.create({
+  stopOnClose: true
+});
 
-function getSpawn(command, args, options) {
+var stopReloading = function(electronState) {
+  if (electronState == 'stopped') {
+    process.exit();
+  }
+};
+
+function getSpawn(command, args) {
   if (!/^win/.test(process.platform)) { // linux
     return spawn(command, args, {
       stdio: 'inherit'
@@ -18,17 +26,18 @@ function getSpawn(command, args, options) {
 }
 
 // when using live-update mode set some environment variables so electron will use electron connect
-process.env.LIVE_UPDATE = "true";
-if (process.argv.find(function(args) {
-    return args === '--openDevTools';
-  })) {
-  process.env.OPEN_DEV_TOOLS = "true";
+process.env.LIVE_UPDATE = 'true';
+if (process.argv.find(args => args === '--openDevTools')) {
+  process.env.OPEN_DEV_TOOLS = 'true';
 }
 
 // kicks off all the tasks to run and watch for changes on src and electron files
 gulp.task('watch', ['start-watch-src', 'watch-electron'], function(cb) {
   setTimeout(cb, 200);
 });
+
+// Run electron without compiling all again
+gulp.task('electron', ['copy', 'copy-electron-connect', 'watch-electron', 'start-electron']);
 
 // kicks off all the tasks to run and watch for changes on src files
 gulp.task('start-watch-src', function(cb) {
@@ -66,17 +75,17 @@ gulp.task('npm-install', function(cb) {
 // starts electron
 gulp.task('start-electron', function() {
   // Start browser process
-  electron.start('dist/');
+  electron.start('dist/', stopReloading);
 });
 
 // calls reload from electron-connect
 gulp.task('reload-electron', function() {
   // Reload renderer process
-  electron.broadcast("reloadit", "true");
+  electron.broadcast('reloadit', 'true');
 });
 
 // watches the src files for changes
-gulp.task('watch-src', 'Watch for changed files', function(cb) {
+gulp.task('watch-src', 'Watch for changed files', function() {
   // Reload renderer process after files change
   gulp.watch(['src/**/*'], ['reload']);
 });
@@ -91,13 +100,8 @@ gulp.task('restart', function(cb) {
 });
 
 // calls reload from electron-connect
-gulp.task('restart-electron', function() {
-  // Reload renderer process
-  electron.restart();
-});
+// Reload renderer process
+gulp.task('restart-electron', () => electron.restart(stopReloading));
 
-// watches the electron files for changes
-gulp.task('watch-electron', 'Watch for changed files', function(cb) {
-  // Reload main process after files change
-  gulp.watch(['electron/**/*'], ['restart']);
-});
+    // watches the electron files for changes
+    gulp.task('watch-electron', 'Watch for changed files', () => gulp.watch(['electron/**/*'], ['restart']));

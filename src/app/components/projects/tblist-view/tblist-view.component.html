@@ -1,0 +1,8 @@
+<div layout="row" layout-wrap>
+  <div flex=100 *ngFor="let project of projects">
+    <md-card>
+      <md-card-title>{{project.name}}</md-card-title>
+      <md-card-subtitle>{{project.description}}</md-card-subtitle>
+    </md-card>
+  </div>
+</div>

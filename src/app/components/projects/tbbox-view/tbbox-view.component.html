@@ -1,0 +1,8 @@
+<div flex layout="row" layout-wrap>
+  <div flex=25 *ngFor="let project of projects">
+    <md-card>
+      <md-card-title class="text-truncate">{{project.name}}</md-card-title>
+      <md-card-subtitle>{{project.description}}</md-card-subtitle>
+    </md-card>
+  </div>
+</div>

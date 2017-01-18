@@ -1,13 +1,37 @@
 const {
   app,
   BrowserWindow,
-  protocol
+  protocol,
+  Menu
 } = require('electron');
+
 var client;
 // Connect to live update if LIVE_UPDATE env variable is true
-if (process.env.LIVE_UPDATE === "true") {
+if (process.env.LIVE_UPDATE === 'true') {
   client = require('electron-connect').client;
 }
+// let template = [{
+//   label: app.getName(),
+//   submenu: [{
+//     label: 'custom action 1',
+//     accelerator: 'CmdOrCtrl+R',
+//     click() {
+//       console.log('go!');
+//     }
+//   }, {
+//     label: 'custom action 2',
+//     accelerator: 'Shift+CmdOrCtrl+R+R',
+//     click() {
+//       console.log('go!');
+//     }
+//   }, {
+//     type: 'separator'
+//   }, {
+//     role: 'quit'
+//   }]
+// }];
+
+// const menu = Menu.buildFromTemplate(template);
 
 const path = require('path');
 const url = require('url');
@@ -17,7 +41,6 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  //Intercept any urls on the page and find the file on disk instead
   protocol.interceptFileProtocol('file', function(req, callback) {
     var url = req.url.substr(7);
     callback({
@@ -28,64 +51,48 @@ function createWindow() {
       console.error('Failed to register protocol');
     }
   });
-
-  // Create the browser window.
   mainWindow = new BrowserWindow({
+    show: false,
     width: 800,
     height: 600,
     minWidth: 800,
     minHeight: 600,
     titleBarStyle: 'hidden-inset',
-    "web-preferences": {
-      "web-security": false
+    'web-preferences': {
+      'web-security': false
     }
   });
-
-  // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: 'index.html',
     protocol: 'file:',
     slashes: true
   }));
 
-  // Open the DevTools.
-  if (process.env.OPEN_DEV_TOOLS === "true") {
+  if (process.env.OPEN_DEV_TOOLS === 'true') {
     mainWindow.webContents.openDevTools();
   }
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null;
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+    // webFrame.setVisualZoomLevelLimits(1, 1);
   });
-
-  // Connect to live update if LIVE_UPDATE env variable is true
+  mainWindow.on('closed', () => mainWindow = null);
+  // Menu.setApplicationMenu(menu);
   if (client) {
     client.create(mainWindow, {
-      "sendBounds": false
+      'sendBounds': false
     });
   }
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
-// Quit when all windows are closed.
 app.on('window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
 app.on('activate', function() {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow();
   }

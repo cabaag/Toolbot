@@ -1,5 +1,5 @@
 {
-  "name": "ToolBot",
+  "name": "toolbot",
   "version": "0.0.1",
   "description": "Set of tools for help developers to manage, update, upgrade their projects and find help.",
   "main": "main.js",
@@ -18,7 +18,6 @@
   "license": "MIT",
   "author": "Carlos Barranco <caba9313@gmail.com>",
   "dependencies": {
-    "monaco-editor": "^0.7.0"
   },
   "devDependencies": {
     "electron": "^1.4.1"

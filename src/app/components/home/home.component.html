@@ -5,14 +5,13 @@
       <md-card-subtitle>caba9313@gmail.com</md-card-subtitle>
     </md-card>
 
-    <div flex=40 class="projects-card">
-      <md-card>
+    <div flex=40>
+      <md-card class="projects-card">
         <md-card-title>Projects</md-card-title>
         <md-card-subtitle>87 projects</md-card-subtitle>
         <md-divider></md-divider>
-        <md-card-content>
-          <md-list class="project">
-            <template let-item let-last="last" ngFor [ngForOf]="projects">
+        <md-list class="project">
+          <template let-item let-last="last" ngFor [ngForOf]="projects">
               <md-list-item>
                 <img *ngIf="item.image" md-list-avatar src="{{item.image}}" alt />
                 <div *ngIf="!item.image" class="projectLetter" md-list-avatar alt>{{item.name[0]}}</div>
@@ -21,28 +20,66 @@
               </md-list-item>
               <md-divider *ngIf="!last" md-inset></md-divider>
             </template>
-          </md-list>
-        </md-card-content>
+        </md-list>
       </md-card>
-    </div>
 
-    <div flex=60 class="markers-card">
-      <md-card>
-        <md-card-title>Marcadores</md-card-title>
+      <md-card class="issues-card">
+        <md-card-title>Issues</md-card-title>
+        <md-card-subtitle>Issues provide by different sources.</md-card-subtitle>
         <md-divider></md-divider>
-        <md-card-content>
-          <md-list class="project">
-            <template let-item let-last="last" ngFor [ngForOf]="projects">
+        <md-list>
+          <template let-item let-last="last" ngFor [ngForOf]="issues">
             <md-list-item>
-              <img *ngIf="item.image" md-list-avatar src="{{item.image}}" alt />
-              <div *ngIf="!item.image" class="projectLetter" md-list-avatar alt>{{item.name[0]}}</div>
-              <h3 md-line> {{item.name}} </h3>
+              <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
+              <h3 md-line> {{item.project}} </h3>
+              <h4 md-line> {{item.title}} </h4>
               <p md-line> {{item.description}} </p>
             </md-list-item>
             <md-divider *ngIf="!last" md-inset></md-divider>
           </template>
-          </md-list>
-        </md-card-content>
+        </md-list>
+      </md-card>
+    </div>
+
+    <div flex=60>
+      <md-card class="todos-card">
+        <md-card-title>Todos</md-card-title>
+        <!--<td-search-box placeholder="Search" [alwaysVisible]="true"></td-search-box>-->
+        <md-divider></md-divider>
+        <md-list>
+          <template ngFor let-todo [ngForOf]="todos">
+            <md-list-item>
+              <div layout="row" layout-align="start center" style="width: 100%;">
+                <div flex layout="row" layout-align="start center">
+                  <md-checkbox [checked]="todo.finished">
+                    {{ todo.name }}
+                  </md-checkbox>
+                  <span flex></span>
+                  <span flex=20>{{todo.deadline | date:'MMM d'}}</span>
+                </div>
+                <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
+                <md-menu x-position="before" #menu="mdMenu">
+                  <button md-menu-item> Go to </button>
+                  <button md-menu-item> Send </button>
+                  <button md-menu-item> Delete </button>
+                </md-menu>
+              </div>
+            </md-list-item>
+            <md-divider></md-divider>
+          </template>
+        </md-list>
+      </md-card>
+
+      <md-card class="resources-card">
+        <md-card-title>Resources</md-card-title>
+        <md-card-subtitle>Pages that can view after.</md-card-subtitle>
+        <md-divider></md-divider>
+        <md-nav-list>
+          <template let-item let-last="last" ngFor [ngForOf]="resources">
+            <a md-list-item [routerLink]="item.link"> {{item.name}}  </a>
+            <md-divider *ngIf="!last"></md-divider>
+          </template>
+        </md-nav-list>
       </md-card>
     </div>
 

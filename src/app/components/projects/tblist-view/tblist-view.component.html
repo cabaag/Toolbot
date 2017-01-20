@@ -1,8 +1,16 @@
 <div layout="row" layout-wrap>
   <div flex=100 *ngFor="let project of projects">
     <md-card>
-      <md-card-title>{{project.name}}</md-card-title>
+      <md-card-title layout layout-align="center">
+        <span>{{project.name}}</span>
+        <span flex></span>
+        <md-icon>{{project.star ? 'star' : 'star_border'}}</md-icon>
+      </md-card-title>
       <md-card-subtitle>{{project.description}}</md-card-subtitle>
+      <md-card-content layout="column">
+        Issues:
+        Todos:
+      </md-card-content>
     </md-card>
   </div>
 </div>

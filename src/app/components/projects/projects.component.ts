@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Project } from './../../services/project';
+import { ProjectsService } from './../../services/projects.service';
+
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -7,20 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
   listView: boolean = true;
-  projects = [{
-    image: undefined,
-    name: 'FlexboxLayout',
-    description: 'Super flexbox layout'
-  }, {
-    image: undefined,
-    name: 'ToolBot',
-    description: 'Set of tools for help developers to manage, update, upgrade their projects and find help.'
-  }, {
-    image: undefined,
-    name: 'ToolBot',
-    description: 'Set of tools for help developers to manage, update, upgrade their projects and find help.'
-  }];
-  constructor() { }
+  projects: Project[];
+  constructor(
+    private _projects: ProjectsService
+  ) {
+    this.projects = _projects.getProjects();
+  }
 
   ngOnInit() {
   }

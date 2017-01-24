@@ -1,13 +1,16 @@
 <div flex layout="row" layout-wrap>
   <div flex=33 *ngFor="let project of projects">
     <md-card>
-      <md-card-title layout layout-align="center">
+      <md-card-title layout layout-align="center center">
         <span>{{project.name}}</span>
         <span flex></span>
-        <!--<md-icon>{{project.star ? 'star' : 'star_border'}}</md-icon>-->
+        <button md-icon-button>
+          <md-icon>{{project.star ? 'star' : 'star_border'}}</md-icon>
+        </button>
       </md-card-title>
-      <md-card-subtitle>{{project.description}}</md-card-subtitle>
+      <!--<md-card-subtitle>{{project.description}}</md-card-subtitle>-->
       <md-card-content layout="column">
+        {{project.description}}
       </md-card-content>
       <md-card-actions layout="row">
         <div flex layout layout-align="space-around center">

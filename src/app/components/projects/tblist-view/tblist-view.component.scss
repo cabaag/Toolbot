@@ -1,0 +1,10 @@
+:host {
+  md-card {
+    md-card-subtitle {
+      line-height: 14px;
+      max-height: calc(14 * 2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

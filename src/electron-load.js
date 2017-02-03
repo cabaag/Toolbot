@@ -7,10 +7,11 @@ var url = require('url');
 var client;
 // Add all 3rd party node_modules included in the Electron app to be able to be used
 module.paths.push(path.resolve(electron.remote.app.getAppPath() + '/node_modules'));
+var jetpack = require(module.paths[1]+'/fs-jetpack');
 // if LIVE_UPDATE env variable is true then use electron-connect
-if (electron.remote.process.env.LIVE_UPDATE === "true") {
+if (electron.remote.process.env.LIVE_UPDATE === 'true') {
   client = require('electron-connect').client.create();
-  client.on("reloadit", function() {
+  client.on('reloadit', function() {
     electron.remote.getCurrentWindow().removeAllListeners();
     electron.remote.getCurrentWindow().loadURL(url.format({
       pathname: 'index.html',

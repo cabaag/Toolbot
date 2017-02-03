@@ -1,5 +1,5 @@
 <div layout="row" layout-wrap>
-  <div flex=100 *ngFor="let project of projects">
+  <div flex=100 *ngFor="let project of projects | filterProjects: keywords">
     <md-card>
       <md-card-title layout layout-align="center center">
         <span>{{project.name}}</span>

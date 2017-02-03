@@ -1,38 +1,39 @@
 {
   "project": {
-    "version": "1.0.0-beta.24",
-    "name": "ToolBoot"
+    "version": "1.0.0-beta.26",
+    "name": "toolbot"
   },
-  "apps": [{
-    "root": "src",
-    "outDir": "dist",
-    "assets": [
-      "app/assets",
-      "electron-load.js"
-    ],
-    "index": "index.html",
-    "main": "main.ts",
-    "test": "test.ts",
-    "tsconfig": "tsconfig.json",
-    "prefix": "app",
-    "mobile": false,
-    "styles": [
-      "styles.scss",
-      "theme.scss",
-      "../node_modules/@covalent/core/common/platform.css"
-    ],
-    "scripts": [
-      "../node_modules/hammerjs/hammer.min.js",
-      "../node_modules/showdown/dist/showdown.js"
-    ],
-    "environments": {
-      "source": "environments/environment.ts",
-      "dev": "environments/environment.ts",
-      "prod": "environments/environment.prod.ts"
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "electron-load.js",
+        "assets/ico/favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "mobile": false,
+      "styles": [
+        "styles.scss",
+        "theme.scss",
+        "../node_modules/@covalent/core/common/platform.css"
+      ],
+      "scripts": [
+        "../node_modules/hammerjs/hammer.min.js",
+        "../node_modules/showdown/dist/showdown.js"
+      ],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
     }
-  }],
-  "addons": [],
-  "packages": [],
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
@@ -46,7 +47,6 @@
   "defaults": {
     "styleExt": "scss",
     "prefixInterfaces": false,
-    "lazyRoutePrefix": "+",
     "inline": {
       "style": false,
       "template": false

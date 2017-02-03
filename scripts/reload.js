@@ -103,5 +103,5 @@ gulp.task('restart', function(cb) {
 // Reload renderer process
 gulp.task('restart-electron', () => electron.restart(stopReloading));
 
-    // watches the electron files for changes
-    gulp.task('watch-electron', 'Watch for changed files', () => gulp.watch(['electron/**/*'], ['restart']));
+// watches the electron files for changes
+gulp.task('watch-electron', 'Watch for changed files', () => gulp.watch(['electron/**/*'], ['restart']));

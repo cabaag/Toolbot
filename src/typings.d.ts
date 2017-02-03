@@ -1,7 +1,7 @@
 // Typings reference file, see links for more information
 // https://github.com/typings/typings
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
-
+// <reference types="fs" />
 declare var System: any;
 // Need to use NodeRequire when using Electron
 declare var require: NodeRequire;
@@ -11,3 +11,4 @@ declare var require: NodeRequire;
 declare var fs: any;
 declare var electron: any;
 declare var path: any;
+declare var jetpack: any;

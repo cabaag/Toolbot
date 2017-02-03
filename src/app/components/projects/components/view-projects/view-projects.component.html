@@ -1,0 +1,6 @@
+<div class="md-content" layout="row" layout-align="center center">
+  <div layout="row" flex=70 flex-md=100 layout-wrap>
+    <tblist-view *ngIf="listView" flex=100 [projects]="projects" [keywords]="searchInputTerm"></tblist-view>
+    <tbbox-view *ngIf="!listView" flex=100 [projects]="projects" [keywords]="searchInputTerm"></tbbox-view>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TBBoxViewComponent implements OnInit {
   @Input() projects;
+  @Input() keywords;
 
   constructor() { }
 

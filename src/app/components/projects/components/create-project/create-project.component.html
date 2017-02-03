@@ -1,0 +1,49 @@
+<md-toolbar>
+  <div flex layout layout-align="center center">
+    <div md-dialog-title>Create new project</div>
+    <span flex></span>
+    <button md-icon-button md-dialog-close><md-icon>close</md-icon></button>
+  </div>
+</md-toolbar>
+<md-dialog-content class="push-none pad-none">
+  <td-steps mode="horizontal">
+    <td-step label="Description" active="true" [state]="description">
+      <div layout="row" layout-margin layout-align="start center">
+        <button md-icon-button (click)="selectImage()"><md-icon svgIcon="assets:toolbot"></md-icon></button>
+        <md-input-container flex>
+          <input md-input placeholder="Name" [(ngModel)]="project.name" />
+        </md-input-container>
+      </div>
+      <div layout="row" layout-margin>
+        <md-input-container flex>
+          <input md-input placeholder="Directory" [(ngModel)]="project.path" (click)="selectDirectory()" />
+        </md-input-container>
+        <button flex=10 md-button (click)="selectDirectory()">Select</button>
+      </div>
+      <td-chips layout-margin placeholder="Keywords" [(ngModel)]="project.keywords"></td-chips>
+      <div layout="row" layout-margin>
+        <md-input-container flex>
+          <textarea md-input placeholder="Description" [(ngModel)]="project.description" rows=5></textarea>
+        </md-input-container>
+      </div>
+    </td-step>
+
+    
+    <td-step label="Managers" [state]="managers">
+      <md-list>
+        <md-list-item *ngFor="let manager of managers">
+          <md-checkbox [checked]="manager.checked">
+            {{ manager.name }}
+          </md-checkbox>
+        </md-list-item>
+      </md-list>
+    </td-step>
+
+    <td-step label="">
+
+    </td-step>
+  </td-steps>
+</md-dialog-content>
+<md-dialog-actions layout="row" layout-align="end center" layout-margin>
+  <button md-raised-button color="primary" md-dialog-close (click)="createProject()">Create</button>
+</md-dialog-actions>

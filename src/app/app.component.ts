@@ -38,7 +38,6 @@ export class AppComponent {
     private _domSanitizer: DomSanitizer,
     viewContainerRef: ViewContainerRef) {
     this._iconRegistry.addSvgIconInNamespace('assets', 'toolbot',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('app/assets/icons/github.svg'));
+      this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/github.svg'));
   }
-
 }

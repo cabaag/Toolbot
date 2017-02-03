@@ -5,33 +5,13 @@ const {
   Menu
 } = require('electron');
 
+// const settings = require('electron-settings');
+
 var client;
 // Connect to live update if LIVE_UPDATE env variable is true
 if (process.env.LIVE_UPDATE === 'true') {
   client = require('electron-connect').client;
 }
-// let template = [{
-//   label: app.getName(),
-//   submenu: [{
-//     label: 'custom action 1',
-//     accelerator: 'CmdOrCtrl+R',
-//     click() {
-//       console.log('go!');
-//     }
-//   }, {
-//     label: 'custom action 2',
-//     accelerator: 'Shift+CmdOrCtrl+R+R',
-//     click() {
-//       console.log('go!');
-//     }
-//   }, {
-//     type: 'separator'
-//   }, {
-//     role: 'quit'
-//   }]
-// }];
-
-// const menu = Menu.buildFromTemplate(template);
 
 const path = require('path');
 const url = require('url');
@@ -41,6 +21,8 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
+  firstRun();
+  init();
   protocol.interceptFileProtocol('file', function(req, callback) {
     var url = req.url.substr(7);
     callback({
@@ -59,9 +41,11 @@ function createWindow() {
     minHeight: 600,
     titleBarStyle: 'hidden-inset',
     'web-preferences': {
-      'web-security': false
+      'web-security': false,
+      'node-integration': true
     }
   });
+
   mainWindow.loadURL(url.format({
     pathname: 'index.html',
     protocol: 'file:',
@@ -76,7 +60,6 @@ function createWindow() {
     // webFrame.setVisualZoomLevelLimits(1, 1);
   });
   mainWindow.on('closed', () => mainWindow = null);
-  // Menu.setApplicationMenu(menu);
   if (client) {
     client.create(mainWindow, {
       'sendBounds': false
@@ -100,3 +83,19 @@ app.on('activate', function() {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+// Code that run once only when is open first time
+function firstRun() {
+  // settings.defaults({
+  //   projects: {
+  //     view: 'list',
+  //     paths: []
+  //   }
+  // });
+}
+
+// Initialize all preferences before open window
+function init() {
+  // const menu = Menu.buildFromTemplate(template);  
+  // Menu.setApplicationMenu(menu);
+}

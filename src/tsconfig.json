@@ -1,11 +1,11 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "",
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "mapRoot": "./",
     "lib": ["es6", "dom"],
+    "mapRoot": "./",
     "module": "es6",
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",

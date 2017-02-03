@@ -1,0 +1,30 @@
+<div layout="row" layout-wrap>
+  <div flex=33 *ngFor="let project of projects | filterProjects: keywords" [routerLink]="['/projects', project.id]">
+    <md-card layout="column">
+      <md-card-title layout layout-align="center center">
+        <span>{{project.name}}</span>
+        <span flex></span>
+        <button md-icon-button>
+          <md-icon>{{project.star ? 'star' : 'star_border'}}</md-icon>
+        </button>
+      </md-card-title>
+      <md-card-content flex>
+        {{project.description}}
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="space-around">
+        <button md-button>
+          <md-icon color="primary">file_download</md-icon>
+          <span>{{project.update ? project.update : 0}}</span>
+        </button>
+        <button md-button>
+          <md-icon color="accent">assignment</md-icon>
+          <span>{{project.todos ? project.todos : 0}}</span>
+        </button>
+        <button md-button>
+          <md-icon color="warn">bug_report</md-icon>
+          <span>{{project.bugs ? project.bugs : 0}}</span>
+        </button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>

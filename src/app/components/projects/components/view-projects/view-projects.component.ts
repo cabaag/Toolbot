@@ -17,33 +17,38 @@ if (electron) {
   styleUrls: ['./view-projects.component.scss']
 })
 export class ViewProjectsComponent implements OnInit {
-  listView: boolean = true;
+  listViewActive: boolean = true;
   projects: Project[];
-  showWindowCreateProject: boolean = false;
-  private currentPath: string = process.cwd();
 
   constructor(
     private _projects: ProjectsService,
     private _cookieService: CookieService,
     private _dialog: MdDialog
   ) {
-    this.projects = _projects.getProjects();
+    setTimeout(()=> {
+      this.projects = _projects.getProjects();
+    }, 3000);
+    this.listViewActive = this.getViewPreferences();
   }
 
   ngOnInit() {
-    this.listView = this.getViewPreferences();
   }
 
+  /**
+   * Change the view of how the projects are visualized.
+   * @param view. The way that projects will be viewed.
+   */
   changeView(view: string): void {
-    this.listView = view === 'list';
-    this._cookieService.put('typeViewProjects', this.listView + '');
+    this.listViewActive = view === 'list';
+    this._cookieService.put('activeView', view);
   }
 
-  /*
-  *  Get prefererences of the view of projects
-  */
+  /**
+   * Get prefererences of the view for component.
+   * @returns If projects will be view as list or boxes.
+   */
   getViewPreferences(): boolean {
-    return this._cookieService.get('typeViewProjects') === 'true';
+    return this._cookieService.get('activeView') === 'list';
   }
 
   openCreateProjectDialog() {

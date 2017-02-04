@@ -1,4 +1,7 @@
 :host {
+  .loading {
+    min-height: 500px;
+  }
   md-card {
     cursor: pointer;
     min-height: 220px;

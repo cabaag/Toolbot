@@ -1,4 +1,7 @@
-<div layout="row" layout-wrap>
+<div class="loading" *ngIf="!projects.length" layout="column" layout-align="center center">
+  <md-progress-spinner  mode="indeterminate"></md-progress-spinner>
+</div>
+<div layout="row" layout-wrap *ngIf="projects.length">
   <div flex=33 *ngFor="let project of projects | filterProjects: keywords" [routerLink]="['/projects', project.id]">
     <md-card layout="column">
       <md-card-title layout layout-align="center center">

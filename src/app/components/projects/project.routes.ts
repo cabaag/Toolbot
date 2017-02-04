@@ -8,17 +8,16 @@ import { ProjectsService } from './services/projects.service';
 import { ViewProjectsComponent } from './components/view-projects/view-projects.component';
 
 const routes: Routes = [{
-    path: 'projects',
-    component: ProjectsComponent,
-    children: [{
-      path: '',
-      component: ViewProjectsComponent
-    }]
+  path: 'projects',
+  component: ProjectsComponent,
+  children: [{
+    path: '',
+    component: ViewProjectsComponent
   }, {
-    path: 'projects/:id',
+    path: ':id',
     component: DetailsProjectComponent
-  }
-];
+  }]
+}];
 
 export const projectComponents: Component[] = [
   ProjectsComponent,

@@ -4,6 +4,7 @@ $primary: md-palette($md-grey, 900);
 $accent: md-palette($md-orange, 800, A100, A400);
 :host /deep/ {
   .projects-card .project {
+    cursor: pointer;
     .projectLetter {
       text-transform: uppercase;
       background-color: md-color($accent);

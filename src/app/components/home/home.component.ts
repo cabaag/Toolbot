@@ -1,7 +1,9 @@
-import { AfterViewInit, Component } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { IssuesService } from './../../services/issues.service';
+import { Project } from './../projects/project';
+import { ProjectsService } from './../projects/services/projects.service';
 import { ResourcesService } from './../../services/resources.service';
+import { Subscription } from 'rxjs/Subscription';
 import { Todo } from './../../services/todo';
 import { TodosService } from './../../services/todos.service';
 
@@ -10,22 +12,8 @@ import { TodosService } from './../../services/todos.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements AfterViewInit {
-  projects: Object[] = [{
-    image: undefined,
-    name: 'FlexboxLayout',
-    description: 'Super flexbox layout'
-  }, {
-    image: undefined,
-    name: 'ToolBot',
-    description: 'Set of tools for help developers to manage, update, upgrade their projects and find help.'
-  }, {
-    image: undefined,
-    name: 'ToolBot',
-    description: 'Set of tools for help developers to manage, update, upgrade their projects and find help.'
-  }];
-
-
+export class HomeComponent{
+  projects: Project[];
   todos: Todo[];
   issues: Object[];
   resources: Object[];
@@ -33,14 +21,16 @@ export class HomeComponent implements AfterViewInit {
   constructor(
     private _todos: TodosService,
     private _issues: IssuesService,
-    private _resources: ResourcesService
+    private _resources: ResourcesService,
+    private _projects: ProjectsService
   ) {
+    this._projects.getProjects()
+      .then((projects: Project[]) => {
+        this.projects = projects;
+      });
+    // this.projects = _projects.getProjects();
     this.todos = _todos.getTodos();
     this.issues = _issues.getIssues();
     this.resources = _resources.getResources();
-  }
-
-  ngAfterViewInit(): void {
-    // do Something
   }
 }

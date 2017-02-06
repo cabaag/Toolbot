@@ -6,13 +6,15 @@
     </md-card>
 
     <div flex=40>
+
+      <!--Projects card-->
       <md-card class="projects-card">
         <md-card-title>Projects</md-card-title>
-        <md-card-subtitle>87 projects</md-card-subtitle>
+        <md-card-subtitle>{{projects?.length || 0}} projects</md-card-subtitle>
         <md-divider></md-divider>
-        <md-list class="project">
+        <md-list>
           <template let-item let-last="last" ngFor [ngForOf]="projects">
-              <md-list-item>
+              <md-list-item class="project" [routerLink]="['/projects', item.id]">
                 <img *ngIf="item.image" md-list-avatar src="{{item.image}}" alt />
                 <div *ngIf="!item.image" class="projectLetter" md-list-avatar alt>{{item.name[0]}}</div>
                 <h3 md-line> {{item.name}} </h3>

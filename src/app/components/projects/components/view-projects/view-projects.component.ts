@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { CreateProjectComponent } from './../create-project/create-project.component';
 import { MdDialog } from '@angular/material';
 import { Project } from './../../project';
 import { ProjectsService } from './../../services/projects.service';
+import { Subscription } from 'rxjs/Subscription';
 
 if (electron) {
   const dialog = electron.remote.dialog;
@@ -16,8 +16,9 @@ if (electron) {
   templateUrl: './view-projects.component.html',
   styleUrls: ['./view-projects.component.scss']
 })
-export class ViewProjectsComponent implements OnInit {
+export class ViewProjectsComponent {
   listViewActive: boolean = true;
+  subscriptionProjects: Subscription;
   projects: Project[];
 
   constructor(
@@ -25,13 +26,12 @@ export class ViewProjectsComponent implements OnInit {
     private _cookieService: CookieService,
     private _dialog: MdDialog
   ) {
-    setTimeout(()=> {
-      this.projects = _projects.getProjects();
-    }, 3000);
+    this._projects.getProjects()
+      .then((projects: Project[]) => {
+        this.projects = projects;
+      });
+    // this.projects = _projects.getProjects();
     this.listViewActive = this.getViewPreferences();
-  }
-
-  ngOnInit() {
   }
 
   /**

@@ -5,6 +5,7 @@ import { DetailsProjectComponent } from './components/details-project/details-pr
 import { FilterProjectsPipe } from './pipes/filter-projects.pipe';
 import { ProjectsComponent } from './projects.component';
 import { ProjectsService } from './services/projects.service';
+import { SortProjectsPipe } from './pipes/sort-projects.pipe';
 import { ViewProjectsComponent } from './components/view-projects/view-projects.component';
 
 const routes: Routes = [{
@@ -30,6 +31,7 @@ export const projectProviders: Injectable[] = [
 ];
 
 export const projectPipes: Injectable[] = [
-  FilterProjectsPipe
+  FilterProjectsPipe,
+  SortProjectsPipe
 ];
 export const projectRoutes: ModuleWithProviders = RouterModule.forChild(routes);

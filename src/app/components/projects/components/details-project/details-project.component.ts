@@ -6,6 +6,7 @@ import { Project } from './../../project';
 import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TdDialogService } from '@covalent/core';
+import { Todo } from './../../../../services/todo';
 import { ViewContainerRef } from '@angular/core';
 
 @Component({
@@ -63,6 +64,10 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  addTodo(): void {
+    this.project.todos.push(new Todo(new Date().getTime()));
   }
 
 }

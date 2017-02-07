@@ -1,3 +1,4 @@
+import { Todo } from './../../services/todo';
 interface IProject {
   id?: number;
   name?: string;
@@ -6,6 +7,7 @@ interface IProject {
   image?: string;
   star?: boolean;
   keywords?: string[];
+  todos?: Todo[];
 }
 export class Project implements IProject {
   public id?: number;
@@ -15,6 +17,7 @@ export class Project implements IProject {
   public image: string = undefined;
   public star = false;
   public keywords: string[] = [];
+  public todos: Todo[];
 
   constructor(p?: IProject) {
     this.id = p && p.id || new Date().getTime();
@@ -24,5 +27,10 @@ export class Project implements IProject {
     this.image = p && p.image || undefined;
     this.star = p && p.star || false;
     this.keywords = p && p.keywords || [];
+    this.todos = p && p.todos || [];
+  }
+
+  getTodos(): Todo[] {
+    return this.todos;
   }
 }

@@ -1,25 +1,29 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { CreateProjectComponent } from './../create-project/create-project.component';
+import { FilterProjectsPipe } from './../../pipes/filter-projects.pipe';
 import { MdDialog } from '@angular/material';
 import { Project } from './../../project';
 import { ProjectsService } from './../../services/projects.service';
+import { SortProjectsPipe } from './../../pipes/sort-projects.pipe';
 import { Subscription } from 'rxjs/Subscription';
 
 if (electron) {
   const dialog = electron.remote.dialog;
 }
 
+enum sorting { DEFAULT, NAME };
 
 @Component({
   selector: 'app-view-projects',
   templateUrl: './view-projects.component.html',
-  styleUrls: ['./view-projects.component.scss']
+  styleUrls: ['./view-projects.component.scss'],
 })
 export class ViewProjectsComponent {
   listViewActive: boolean = true;
   subscriptionProjects: Subscription;
   projects: Project[];
+  private sortBy: number = sorting.DEFAULT;
 
   constructor(
     private _projects: ProjectsService,
@@ -48,7 +52,8 @@ export class ViewProjectsComponent {
    * @returns If projects will be view as list or boxes.
    */
   getViewPreferences(): boolean {
-    return this._cookieService.get('activeView') === 'list';
+    const view = this._cookieService.get('activeView');
+    return view === 'list';
   }
 
   openCreateProjectDialog() {

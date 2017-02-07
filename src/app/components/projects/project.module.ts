@@ -7,16 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TBBoxViewComponent } from './components/tbbox-view/tbbox-view.component';
-import { TBListViewComponent } from './components/tblist-view/tblist-view.component';
 
 @NgModule({
   declarations: [
     projectComponents,
     CreateProjectComponent,
-    TBBoxViewComponent,
-    TBListViewComponent,
-    projectPipes
+    projectPipes,
   ],
   // directives, components, and pipes owned by this NgModule
   imports: [

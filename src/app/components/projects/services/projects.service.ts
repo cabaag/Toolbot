@@ -37,17 +37,21 @@ export class ProjectsService {
    */
   private readProjects(): Promise<Array<Project>> {
     return new Promise(resolve => {
-      jetpack.readAsync(`${this.base}/projects.json`, {
-        utf8: false,
-        json: true,
-        jsonWithDates: true
-      }).then(projects => {
-        projects = JSON.parse(projects);
-        projects.forEach(p => {
-          this.projects.push(new Project(p));
+      if (electron) {
+        jetpack.readAsync(`${this.base}/projects.json`, {
+          utf8: false,
+          json: true,
+          jsonWithDates: true
+        }).then(projects => {
+          projects = JSON.parse(projects);
+          projects.forEach(p => {
+            this.projects.push(new Project(p));
+          });
+          resolve(this.projects);
         });
+      } else {
         resolve(this.projects);
-      });
+      }
     });
   }
 

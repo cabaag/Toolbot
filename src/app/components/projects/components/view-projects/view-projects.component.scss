@@ -1,0 +1,22 @@
+:host {
+  .loading {
+    min-height: 500px;
+  }
+  .projects {
+    &.list {}
+    &.box {
+      .project md-card{
+        min-height: 220px;
+        md-card-actions button {
+          min-width: auto;
+        }
+      }
+    }
+    .project {
+      transition: max-width 250ms ease;
+      md-card{
+        cursor: pointer;
+      }
+    }
+  }
+}

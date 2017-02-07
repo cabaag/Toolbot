@@ -1,10 +1,10 @@
-<md-toolbar>
+<!--<md-toolbar>
   <div flex layout layout-align="center center">
     <div md-dialog-title>Create new project</div>
     <span flex></span>
     <button md-icon-button md-dialog-close><md-icon>close</md-icon></button>
   </div>
-</md-toolbar>
+</md-toolbar>-->
 <md-dialog-content class="push-none pad-none">
   <td-steps mode="horizontal">
     <td-step label="Description" active="true" [state]="description">
@@ -45,5 +45,6 @@
   </td-steps>
 </md-dialog-content>
 <md-dialog-actions layout="row" layout-align="end center" layout-margin>
+  <button md-raised-button color="warning" md-dialog-close md-dialog-close>Cancel</button>
   <button md-raised-button color="primary" md-dialog-close (click)="createProject()">Create</button>
 </md-dialog-actions>

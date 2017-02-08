@@ -3,9 +3,12 @@ import { Project } from './../project';
 
 @Injectable()
 export class ProjectsService {
-  base: string = electron.remote.app.getAppPath() + '/../data';
+  base: string;
   projects: Project[] = [];
   stream: Promise<Array<Project>>;
+  if(electron) {
+    this.base = electron.remote.app.getAppPath() + '/../data';
+  }
 
   constructor() {
     this.stream = this.readProjects();

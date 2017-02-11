@@ -3,6 +3,7 @@ import { projectComponents, projectPipes, projectProviders, projectRoutes } from
 import { BrowserModule } from '@angular/platform-browser';
 import { CovalentCoreModule } from '@covalent/core';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { RouterModule } from '@angular/router';
     projectComponents,
     CreateProjectComponent,
     projectPipes,
+    EditTodoComponent,
   ],
   // directives, components, and pipes owned by this NgModule
   imports: [
@@ -26,7 +28,8 @@ import { RouterModule } from '@angular/router';
     projectProviders
   ],
   entryComponents: [
-    CreateProjectComponent
+    CreateProjectComponent,
+    EditTodoComponent
   ],
 })
 export class ProjectModule { }

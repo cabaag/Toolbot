@@ -1,54 +1,55 @@
-<md-toolbar>
-  <button md-icon-button (click)="back()"><md-icon>arrow_back</md-icon></button>
-  <span>{{project.name}}</span>
-  <span flex></span>
-  <button md-icon-button color="primary" mdTooltip="Download updates" mdTooltipPosition="below"><md-icon>file_download</md-icon></button>
-  <button md-icon-button color="accent" mdTooltip="Run server" mdTooltipPosition="below"><md-icon>play_arrow</md-icon></button>
-  <button md-icon-button color="warning" mdTooltip="Stop server" mdTooltipPosition="below"><md-icon>stop</md-icon></button>
-  <button md-icon-button mdTooltip="Open in browser" mdTooltipPosition="below"><md-icon>open_in_browser</md-icon></button>
-  <button md-icon-button [mdMenuTriggerFor]="menuProjects"><md-icon>more_vert</md-icon></button>
-  <md-menu #menuProjects="mdMenu">
-    <button md-menu-item>
+<td-layout-nav logo="assets:toolbot">
+  <!--Toolbar content-->
+  <div td-toolbar-content layout="row" layout-align="start center" flex>
+    <button md-icon-button (click)="back()"><md-icon>arrow_back</md-icon></button>
+    <span>{{project.name}}</span>
+    <span flex></span>
+    <button md-icon-button color="primary" mdTooltip="Download updates" mdTooltipPosition="below"><md-icon>file_download</md-icon></button>
+    <button md-icon-button color="accent" mdTooltip="Run server" mdTooltipPosition="below"><md-icon>play_arrow</md-icon></button>
+    <button md-icon-button color="warning" mdTooltip="Stop server" mdTooltipPosition="below"><md-icon>stop</md-icon></button>
+    <button md-icon-button mdTooltip="Open in browser" mdTooltipPosition="below"><md-icon>open_in_browser</md-icon></button>
+    <button md-icon-button [mdMenuTriggerFor]="menuProjects"><md-icon>more_vert</md-icon></button>
+    <md-menu #menuProjects="mdMenu">
+      <button md-menu-item>
       <md-icon>edit</md-icon>
       <span>Edit project</span>
     </button>
-    <button md-menu-item (click)="deleteProject()">
+      <button md-menu-item (click)="deleteProject()">
       <md-icon>delete</md-icon>
       <span>Delete project</span>
     </button>
-  </md-menu>
-</md-toolbar>
-<div class="md-content" layout="row" layout-align="center center">
-  <div layout="row" flex=70 flex-md=100 layout-wrap>
+    </md-menu>
+  </div>
 
-    <div flex=40>
-      <!--Todos card-->
-      <md-card class="todos-card" layout="column">
-        <md-card-title layout="row" layout-align="start center">
-          <div>Todos</div>
-          <span flex></span>
-          <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
-        </md-card-title>
-        <md-card-subtitle>{{project.todos?.length || 0}} todos pending...</md-card-subtitle>
-        <md-divider></md-divider>
-        <md-card-content *ngIf="!project.todos" layout="row" layout-align="center center" flex=100>
-          <h2>GO TO PLAY</h2>
-        </md-card-content>
-        <md-list *ngIf="project.todos">
-          <template ngFor let-todo [ngForOf]="project.todos">
-            <md-list-item *ngIf="todo.editMode" >
+  <!--Content-->
+  <div class="md-content" layout="row" layout-align="center">
+    <div layout="row" flex=70 flex-md=100 layout-wrap>
+
+      <div flex=40>
+        <!--Todos card-->
+        <md-card class="todos-card" layout="column">
+          <md-card-title layout="row" layout-align="start center">
+            <div>Todos</div>
+            <span flex></span>
+            <button md-icon-button (click)="editTodo()"><md-icon>add</md-icon></button>
+          </md-card-title>
+          <md-card-subtitle>{{project.todos?.length || 0}} todos pending...</md-card-subtitle>
+          <md-divider></md-divider>
+          <md-card-content *ngIf="!project.todos" layout="row" layout-align="center center" flex=100>
+            <h2>GO TO PLAY</h2>
+          </md-card-content>
+          <md-list *ngIf="project.todos">
+            <template ngFor let-todo [ngForOf]="project.todos">
+            <md-list-item>
               <div layout="row" layout-align="start center" style="width: 100%;">
                 <div flex layout="row" layout-align="start center">
-                  <md-checkbox [checked]="todo.finished">
-                    <input>
-                    {{ todo.name }}
-                  </md-checkbox>
+                  <md-checkbox [checked]="todo.finished">{{ todo.name }}</md-checkbox>
                   <span flex></span>
                   <span flex=20>{{todo.deadline | date:'MMM d'}}</span>
                 </div>
                 <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
                 <md-menu x-position="before" #menu="mdMenu">
-                  <button md-menu-item> Go to </button>
+                  <button md-menu-item (click)="editTodo()"> Edit </button>
                   <button md-menu-item> Send </button>
                   <button md-menu-item> Delete </button>
                 </md-menu>
@@ -56,20 +57,20 @@
             </md-list-item>
             <md-divider></md-divider>
           </template>
-        </md-list>
-      </md-card>
+          </md-list>
+        </md-card>
 
-      <!--Commands card-->
-      <md-card class="commands-card" layout="column">
-        <md-card-title layout="row" layout-align="start center">
-          <div>Commands</div>
-          <span flex></span>
-          <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
-        </md-card-title>
-        <md-card-subtitle>Commands to run as a terminal.</md-card-subtitle>
-        <md-divider></md-divider>
-        <md-list>
-          <template let-item let-last="last" ngFor [ngForOf]="project.issues">
+        <!--Commands card-->
+        <md-card class="commands-card" layout="column">
+          <md-card-title layout="row" layout-align="start center">
+            <div>Commands</div>
+            <span flex></span>
+            <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
+          </md-card-title>
+          <md-card-subtitle>Commands to run as a terminal.</md-card-subtitle>
+          <md-divider></md-divider>
+          <md-list>
+            <template let-item let-last="last" ngFor [ngForOf]="project.issues">
             <md-list-item>
               <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
               <h3 md-line> {{item.project}} </h3>
@@ -78,25 +79,25 @@
             </md-list-item>
             <md-divider *ngIf="!last" md-inset></md-divider>
           </template>
-        </md-list>
-      </md-card>
-    </div>
+          </md-list>
+        </md-card>
+      </div>
 
-    <div flex=60>
-      <!--Issues card-->
-      <md-card class="issues-card" layout="column">
-        <md-card-title layout="row" layout-align="start center">
-          <div>Issues</div>
-          <span flex></span>
-          <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
-        </md-card-title>
-        <md-card-subtitle>Issues provide by different sources.</md-card-subtitle>
-        <md-divider></md-divider>
-        <md-card-content *ngIf="!project.issues" layout="row" layout-align="center center" flex=100>
-          <h2>THERE ARE NOT BUGS.</h2>
-        </md-card-content>
-        <md-list *ngIf="project.issues">
-          <template let-item let-last="last" ngFor [ngForOf]="project.issues">
+      <div flex=60>
+        <!--Issues card-->
+        <md-card class="issues-card" layout="column">
+          <md-card-title layout="row" layout-align="start center">
+            <div>Issues</div>
+            <span flex></span>
+            <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
+          </md-card-title>
+          <md-card-subtitle>Issues provide by different sources.</md-card-subtitle>
+          <md-divider></md-divider>
+          <md-card-content *ngIf="!project.issues" layout="row" layout-align="center center" flex=100>
+            <h2>THERE ARE NOT BUGS.</h2>
+          </md-card-content>
+          <md-list *ngIf="project.issues">
+            <template let-item let-last="last" ngFor [ngForOf]="project.issues">
             <md-list-item>
               <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
               <h3 md-line> {{item.project}} </h3>
@@ -105,23 +106,23 @@
             </md-list-item>
             <md-divider *ngIf="!last" md-inset></md-divider>
           </template>
-        </md-list>
-      </md-card>
+          </md-list>
+        </md-card>
 
-      <!--Git logs card-->
-      <md-card class="git-logs-card" layout="column">
-        <md-card-title layout="row" layout-align="start center">
-          <div>Git logs</div>
-          <span flex></span>
-          <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
-        </md-card-title>
-        <md-card-subtitle>Commits history of the project.</md-card-subtitle>
-        <md-divider></md-divider>
-        <md-card-content *ngIf="!project.issues" layout="row" layout-align="center center" flex=100>
-          <h2>THE PROJECT IS CLEAN.</h2>
-        </md-card-content>
-        <md-list *ngIf="project.issues">
-          <template let-item let-last="last" ngFor [ngForOf]="project.issues">
+        <!--Git logs card-->
+        <md-card class="git-logs-card" layout="column">
+          <md-card-title layout="row" layout-align="start center">
+            <div>Git logs</div>
+            <span flex></span>
+            <button md-icon-button (click)="addTodo()"><md-icon>add</md-icon></button>
+          </md-card-title>
+          <md-card-subtitle>Commits history of the project.</md-card-subtitle>
+          <md-divider></md-divider>
+          <md-card-content *ngIf="!project.issues" layout="row" layout-align="center center" flex=100>
+            <h2>THE PROJECT IS CLEAN.</h2>
+          </md-card-content>
+          <md-list *ngIf="project.issues">
+            <template let-item let-last="last" ngFor [ngForOf]="project.issues">
             <md-list-item>
               <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
               <h3 md-line> {{item.project}} </h3>
@@ -130,9 +131,16 @@
             </md-list-item>
             <md-divider *ngIf="!last" md-inset></md-divider>
           </template>
-        </md-list>
-      </md-card>
+          </md-list>
+        </md-card>
 
+      </div>
     </div>
   </div>
-</div>
+
+
+  <!--Footer-->
+  <td-layout-footer>
+    Help
+  </td-layout-footer>
+</td-layout-nav>

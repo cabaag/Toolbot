@@ -1,16 +1,18 @@
-<md-toolbar>
-  <span>Projects</span>
-  <span flex></span>
-  <td-search-box flex placeholder="Search" (searchDebounce)="searchInputTerm = $event"></td-search-box>
-  <button *ngIf="!listViewActive" md-button class="md-icon-button" (click)="changeView('list')">
-    <md-icon class="md-24">list</md-icon>
-  </button>
-  <button *ngIf="listViewActive" md-button class="md-icon-button" (click)="changeView('box')">
-    <md-icon class="md-24">view_comfy</md-icon>
-  </button>
-  <button md-icon-button [mdMenuTriggerFor]="menuProjects"><md-icon>more_vert</md-icon></button>
-  <md-menu #menuProjects="mdMenu">
-    <button md-menu-item (click)="openCreateProjectDialog()">
+<td-layout-nav logo="assets:toolbot">
+  <!--Toolbar content-->
+  <div td-toolbar-content layout="row" layout-align="start center" flex>
+    <span>Projects</span>
+    <span flex></span>
+    <td-search-box flex placeholder="Search" backIcon="arrow_forward" (searchDebounce)="searchInputTerm = $event"></td-search-box>
+    <button *ngIf="!listViewActive" md-button class="md-icon-button" (click)="changeView('list')">
+      <md-icon class="md-24">list</md-icon>
+    </button>
+    <button *ngIf="listViewActive" md-button class="md-icon-button" (click)="changeView('box')">
+      <md-icon class="md-24">view_comfy</md-icon>
+    </button>
+    <button md-icon-button [mdMenuTriggerFor]="menuProjects"><md-icon>more_vert</md-icon></button>
+    <md-menu #menuProjects="mdMenu">
+      <button md-menu-item (click)="openCreateProjectDialog()">
       <md-icon>create_new_folder</md-icon>
       <span>Create project</span>
     </button>
@@ -18,47 +20,54 @@
       <md-icon>add</md-icon>
       <span>Add existing project</span>
     </button>
-  </md-menu>
-</md-toolbar>
-<div class="md-content" layout="row" layout-align="center center">
-  <div layout="row" flex=70 flex-md=100 layout-wrap>
-    <div *ngIf="!projects" class="loading" layout="column" layout-align="center center">
-      <md-progress-spinner mode="indeterminate"></md-progress-spinner>
-    </div>
-    <!--<tblist-view *ngIf="listViewActive" flex=100 [projects]="projects" [keywords]="searchInputTerm"></tblist-view>
-    <tbbox-view *ngIf="!listViewActive" flex=100 [projects]="projects" [keywords]="searchInputTerm"></tbbox-view>-->
-    <div *ngIf="projects" flex=100 layout="row" layout-wrap class="projects" [ngClass]="listViewActive ? 'list' : 'box'">
-      <div class="project" 
-      [attr.flex]="listViewActive === true ? 100 : 33" 
-      *ngFor="let project of projects | sortProjects: orderBy | filterProjects: searchInputTerm" 
-      [routerLink]="['/projects', project.id]">
-        <md-card layout="column">
-          <md-card-title layout layout-align="center center">
-            <span>{{project.name}}</span>
-            <span flex></span>
-            <button md-icon-button>
-              <md-icon>{{project.star ? 'star' : 'star_border'}}</md-icon>
-            </button>
-          </md-card-title>
-          <md-card-content flex>
-            {{project.description}}
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="space-around">
-            <button md-button>
-          <md-icon color="primary">file_download</md-icon>
-          <span>{{project.update ? project.update : 0}}</span>
-        </button>
-            <button md-button>
-          <md-icon color="accent">assignment</md-icon>
-          <span>{{project.todos ? project.todos : 0}}</span>
-        </button>
-            <button md-button>
-          <md-icon color="warn">bug_report</md-icon>
-          <span>{{project.bugs ? project.bugs : 0}}</span>
-        </button>
-          </md-card-actions>
-        </md-card>
+    </md-menu>
+  </div>
+
+  <!--Content-->
+  <div layout="row" layout-align="center">
+    <div layout="row" flex=70 flex-md=100 layout-wrap>
+      <div *ngIf="!projects" class="loading" layout="column" layout-align="center center">
+        <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+      </div>
+      <div *ngIf="projects" flex=100 layout="row" layout-wrap class="projects" [ngClass]="listViewActive ? 'list' : 'box'">
+        <div class="project" [attr.flex]="listViewActive === true ? 100 : 33" 
+          *ngFor="let project of projects | sortProjects: orderBy | filterProjects: searchInputTerm">
+          <md-card layout="column" (click)="goToProject($event, project.id)">
+
+            <md-card-title layout layout-align="center center">
+              <span flex>{{project.name}}</span>
+              <button md-icon-button (click)="toogleFav(project)">
+                <md-icon >{{project.star ? 'star' : 'star_border'}}</md-icon>
+              </button>
+            </md-card-title>
+
+            <md-card-content flex>
+              {{project.description}}
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="space-around">
+              <button md-button>
+                <md-icon color="primary">file_download</md-icon>
+                <span>{{project.update ? project.update : 0}}</span>
+              </button>
+              <button md-button>
+                <md-icon color="accent">assignment</md-icon>
+                <span>{{project.todos?.length ||  0}}</span>
+              </button>
+              <button md-button>
+                <md-icon color="warn">bug_report</md-icon>
+                <span>{{project.bugs ? project.bugs : 0}}</span>
+              </button>
+            </md-card-actions>
+            
+          </md-card>
       </div>
     </div>
   </div>
-</div>
+  </div>
+
+  <!--Footer-->
+  <td-layout-footer>
+    Help
+  </td-layout-footer>
+</td-layout-nav>

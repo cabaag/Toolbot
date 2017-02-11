@@ -6,6 +6,7 @@ import { FilterProjectsPipe } from './pipes/filter-projects.pipe';
 import { ProjectsComponent } from './projects.component';
 import { ProjectsService } from './services/projects.service';
 import { SortProjectsPipe } from './pipes/sort-projects.pipe';
+import { TodosService } from './services/todos.service';
 import { ViewProjectsComponent } from './components/view-projects/view-projects.component';
 
 const routes: Routes = [{
@@ -27,7 +28,8 @@ export const projectComponents: Component[] = [
 ];
 
 export const projectProviders: Injectable[] = [
-  ProjectsService
+  ProjectsService,
+  TodosService
 ];
 
 export const projectPipes: Injectable[] = [

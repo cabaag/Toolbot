@@ -1,12 +1,13 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { EditTodoComponent } from './../edit-todo/edit-todo.component';
 import { Location } from '@angular/common';
-import { Project } from './../../project';
+import { MdDialog } from '@angular/material';
+import { Project } from './../../classes/project';
 import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TdDialogService } from '@covalent/core';
-import { Todo } from './../../../../services/todo';
 import { ViewContainerRef } from '@angular/core';
 
 @Component({
@@ -17,12 +18,14 @@ import { ViewContainerRef } from '@angular/core';
 export class DetailsProjectComponent implements OnInit, OnDestroy {
   sub: Subscription;
   project: Project;
+
   constructor(
     private _route: ActivatedRoute,
     private _dialogService: TdDialogService,
     private _viewContainerRef: ViewContainerRef,
     private _location: Location,
     private _router: Router,
+    private _dialog: MdDialog,
 
     // Own services
     private _projects: ProjectsService
@@ -66,8 +69,11 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  addTodo(): void {
-    this.project.todos.push(new Todo(new Date().getTime()));
+  editTodo(): void {
+    this._dialog.open(EditTodoComponent, {
+      width: '450px',
+      height: '630px',
+    });
   }
 
 }

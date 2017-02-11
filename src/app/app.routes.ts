@@ -5,7 +5,6 @@ import { HomeComponent } from './components/home/home.component';
 import { IssuesService } from './services/issues.service';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ResourcesService } from './services/resources.service';
-import { TodosService } from './services/todos.service';
 
 const routes: Routes = [{
     component: HomeComponent,
@@ -21,7 +20,6 @@ const routes: Routes = [{
 ];
 
 export const appRoutingProviders: any[] = [
-  TodosService,
   IssuesService,
   ResourcesService,
   // Third party services

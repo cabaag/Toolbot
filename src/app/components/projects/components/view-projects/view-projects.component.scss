@@ -3,7 +3,9 @@
     min-height: 500px;
   }
   .projects {
+    // Styles for projects when the view is list
     &.list {}
+    // Styles for projects when the view is box
     &.box {
       .project md-card{
         min-height: 220px;
@@ -12,9 +14,10 @@
         }
       }
     }
+    // Styles for projects in general
     .project {
       transition: max-width 250ms ease;
-      md-card{
+      md-card {
         cursor: pointer;
       }
     }

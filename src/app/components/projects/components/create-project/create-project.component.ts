@@ -1,16 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Project } from './../../project';
+import { Project } from './../../classes/project';
 import { ProjectsService } from './../../services/projects.service';
 
 @Component({
-  selector: 'tb-project-create',
+  selector: 'app-create-project',
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.scss']
 })
 export class CreateProjectComponent implements OnInit {
   private electronEnabled: boolean = electron ? true : false;
-  project = new Project();
+  project: { path: string, image: string, name: string, description: string };
   managers = [
     { name: 'Git' },
     { name: 'NPM' },
@@ -55,12 +55,13 @@ export class CreateProjectComponent implements OnInit {
   }
 
   createProject() {
-    const projectTmp = new Project({
-      name: this.project.name,
-      path: this.project.path,
-      description: this.project.description,
-      image: this.project.image,
-    });
+    const projectTmp = new Project(
+      new Date().getTime(),
+      this.project.name,
+      this.project.path,
+      this.project.description,
+      this.project.image,
+    );
     this._projects.createProject(projectTmp);
   }
 

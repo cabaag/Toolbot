@@ -11,19 +11,32 @@ import { Project } from './../project';
  * - Fecha de último cambio
  */
 @Pipe({
-  name: 'sortProjects'
+  name: 'sortProjects',
+  pure: false
 })
 export class SortProjectsPipe implements PipeTransform {
 
+  /**
+   * Sort projects by favourite and the by id
+   */
   sortByFavourite(projects: Project[]): Project[] {
     return projects.sort((a: Project, b: Project) => {
+      // If projects are favourites then sort them by name
       if (a.star === b.star) {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
         return 0;
-      } else if (a.star === true) {
-        return -1;
-      } else if (b.star === true) {
-        return 1;
       }
+      if (a.star === true) return -1;
+      if (b.star === true) return 1;
+    });
+  }
+
+  sortByName(projects: Project[]): Project[] {
+    return projects.sort((a: Project, b: Project) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
     });
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Project } from './../components/projects/project';
-import { ProjectsService } from './../components/projects/services/projects.service';
-import { Todo } from './todo';
+import { Project } from './../classes/project';
+import { ProjectsService } from './projects.service';
+import { Todo } from './../classes/todo';
 
 @Injectable()
 export class TodosService {
@@ -10,7 +10,6 @@ export class TodosService {
     new Todo(new Date().getTime(), 'Terminar todos de home', new Date()),
   ];
 
-  // tslint:disable-next-line:no-empty
   constructor(
     private _projects: ProjectsService
   ) {

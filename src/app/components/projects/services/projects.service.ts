@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Project } from './../project';
+import { Project } from './../classes/project';
 
 @Injectable()
 export class ProjectsService {
   base: string;
   projects: Project[] = [];
-  stream: Promise<Array<Project>>;
+  stream: Promise<[Project]>;
   if(electron) {
     this.base = electron.remote.app.getAppPath() + '/../data';
   }
@@ -28,7 +28,7 @@ export class ProjectsService {
    * @returns Promise with the project.
    */
   getProject(id: number) {
-    return this.projects.filter(p => {
+    return this.projects.filter((p: Project) => {
       return p.id === id;
     })[0];
   }
@@ -47,12 +47,27 @@ export class ProjectsService {
           jsonWithDates: true
         }).then(projects => {
           projects = JSON.parse(projects);
-          projects.forEach(p => {
-            this.projects.push(new Project(p));
+          projects.forEach((p: Project) => {
+            this.projects.push(new Project(
+              +p.id,
+              p.name,
+              p.path,
+              p.description,
+              p.image,
+              p.star,
+              p.keywords,
+              p.todos
+            ));
           });
           resolve(this.projects);
         });
       } else {
+        this.projects = [
+          new Project(new Date().getTime(), 'ToolBot', '/home', 'Set of tools for help developers to manage, update, upgrade their projects and find help.', undefined, true),
+          new Project(new Date().getTime(), 'FlexboxLayout', '/home', 'Super flexbox layout', undefined, false),
+          new Project(new Date().getTime(), 'Angular 2', '/home', 'Hoolis', undefined, true),
+          new Project(new Date().getTime(), 'Vivatronica', '/home', 'Hoolis', undefined, true)
+        ]
         resolve(this.projects);
       }
     });

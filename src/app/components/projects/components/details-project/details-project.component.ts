@@ -1,6 +1,7 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { EditTodoComponent } from './../edit-todo/edit-todo.component';
 import { Location } from '@angular/common';
 import { MdDialog } from '@angular/material';
@@ -8,6 +9,7 @@ import { Project } from './../../classes/project';
 import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TdDialogService } from '@covalent/core';
+import { Todo } from './../../classes/todo';
 import { ViewContainerRef } from '@angular/core';
 
 @Component({
@@ -26,16 +28,15 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
     private _location: Location,
     private _router: Router,
     private _dialog: MdDialog,
+    private _cookie: CookieService,
 
     // Own services
     private _projects: ProjectsService
   ) {
-    this.sub = _route.params.subscribe(params => {
-      this.project = _projects.getProject(+params['id']);
-    });
   }
 
   ngOnInit() {
+    this.sub = this._route.data.subscribe((data: { project: Project }) => this.project = data.project);
   }
 
   ngOnDestroy() {
@@ -69,11 +70,24 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  editTodo(): void {
+  todosPending(): number {
+    return this.project.todos.filter((todo: Todo)=> {
+      return !todo.finished;
+    }).length;
+  }
+
+  /**
+   * Creates a dialog for edit or create a todo task
+   */
+  editTodo(id = -1): void {
     this._dialog.open(EditTodoComponent, {
       width: '450px',
-      height: '630px',
+      height: '450px',
     });
+    this._cookie.put('editingProject', this.project.id.toString());
+    if (id !== -1) {
+      this._cookie.put('editingTodo', id.toString());
+    }
   }
 
 }

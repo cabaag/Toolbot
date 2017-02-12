@@ -1,3 +1,33 @@
-:host {
-  
+@import '~@angular/material/core/theming/all-theme';
+.priority {
+  .color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  .color.not-urgent {
+    background: md-color($md-blue, 500);
+  }
+  .color.normal {
+    background: md-color($md-yellow, 500);
+  }
+  .color.urgent {
+    background: md-color($md-red, 500);
+  }
+}
+
+.todo-description {
+  height: calc(18px * 5);
+  resize: none;
+}
+
+.md-toolbar-layout {
+  position: relative;
+}
+
+.todo-fab-add {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  margin: 0 6px
 }

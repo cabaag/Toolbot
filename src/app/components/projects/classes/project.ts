@@ -1,6 +1,6 @@
-import { Todo } from './../../services/todo';
-
+import { Todo } from './todo';
 export class Project {
+
   constructor(
     public id: number,
     public name: string,
@@ -12,7 +12,32 @@ export class Project {
     public todos: Todo[] = []
   ) { }
 
+  /**
+   * Get todos of the project
+   */
   getTodos(): Todo[] {
     return this.todos;
   }
+
+  getTodo(id: number): Todo {
+    return this.todos.filter((todo: Todo) => todo.id === id)[0];
+  }
+
+  /**
+   * Creates a new todo
+   */
+  saveTodo(todo: Todo) {
+    this.todos.push(todo);
+  }
+
+  /**
+   * Updates a todo
+   */
+  updateTodo(todo: Todo) {
+    let newTodo = this.todos.filter((t: Todo) => {
+      return t.id === todo.id;
+    })[0];
+    newTodo = todo;
+  }
+
 }

@@ -24,8 +24,8 @@
     "npm": ">3"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cabaag/ToolBot.git"
+    "url": "git+https://github.com/cabaag/ToolBot.git",
+    "type": "git"
   },
   "bugs": {
     "url": "https://github.com/cabaag/ToolBot/issues"
@@ -38,7 +38,7 @@
     "@angular/core": "^2.4.6",
     "@angular/forms": "^2.4.6",
     "@angular/http": "^2.4.6",
-    "@angular/material": "^2.0.0-beta.1",
+    "@angular/material": "latest",
     "@angular/platform-browser": "^2.4.6",
     "@angular/platform-browser-dynamic": "^2.4.6",
     "@angular/platform-server": "^2.4.6",
@@ -94,5 +94,6 @@
     "manage",
     "git",
     "dependencies"
-  ]
+  ],
+  "main": "index.js"
 }

@@ -7,6 +7,7 @@
 </md-toolbar>-->
 <md-dialog-content class="push-none pad-none">
   <td-steps mode="horizontal">
+    
     <td-step label="Description" active="true" [state]="description">
       <div layout="row" layout-margin layout-align="start center">
         <button md-icon-button (click)="selectImage()"><md-icon svgIcon="assets:toolbot"></md-icon></button>
@@ -45,6 +46,6 @@
   </td-steps>
 </md-dialog-content>
 <md-dialog-actions layout="row" layout-align="end center" layout-margin>
-  <button md-raised-button color="warning" md-dialog-close md-dialog-close>Cancel</button>
+  <button md-raised-button color="warning" md-dialog-close>Cancel</button>
   <button md-raised-button color="primary" md-dialog-close (click)="createProject()">Create</button>
 </md-dialog-actions>

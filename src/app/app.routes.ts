@@ -28,4 +28,5 @@ export const appRoutingProviders: any[] = [
 
 export const appPipes: any[] = [
 ];
-export const appRoutes: any = RouterModule.forRoot(routes, { useHash: true });
+export const appRoutes: any = RouterModule.forRoot(routes);
+// export const appRoutes: any = RouterModule.forRoot(routes, { useHash: true });

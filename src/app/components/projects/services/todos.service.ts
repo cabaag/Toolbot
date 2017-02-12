@@ -6,7 +6,7 @@ import { Todo } from './../classes/todo';
 @Injectable()
 export class TodosService {
   todos: Todo[] = [
-    new Todo(new Date().getTime(), 'Terminar ToolBot', new Date(), true),
+    new Todo(new Date().getTime(), 'Terminar ToolBot', new Date(), '', true),
     new Todo(new Date().getTime(), 'Terminar todos de home', new Date()),
   ];
 

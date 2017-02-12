@@ -5,7 +5,7 @@
     <span>{{project.name}}</span>
     <span flex></span>
     <button md-icon-button color="primary" mdTooltip="Download updates" mdTooltipPosition="below"><md-icon>file_download</md-icon></button>
-    <button md-icon-button color="accent" mdTooltip="Run server" mdTooltipPosition="below"><md-icon>play_arrow</md-icon></button>
+    <button md-icon-button class="tc-green-800" mdTooltip="Run server" mdTooltipPosition="below"><md-icon>play_arrow</md-icon></button>
     <button md-icon-button color="warning" mdTooltip="Stop server" mdTooltipPosition="below"><md-icon>stop</md-icon></button>
     <button md-icon-button mdTooltip="Open in browser" mdTooltipPosition="below"><md-icon>open_in_browser</md-icon></button>
     <button md-icon-button [mdMenuTriggerFor]="menuProjects"><md-icon>more_vert</md-icon></button>
@@ -33,30 +33,28 @@
             <span flex></span>
             <button md-icon-button (click)="editTodo()"><md-icon>add</md-icon></button>
           </md-card-title>
-          <md-card-subtitle>{{project.todos?.length || 0}} todos pending...</md-card-subtitle>
+          <md-card-subtitle>{{todosPending()}} todos pending...</md-card-subtitle>
           <md-divider></md-divider>
-          <md-card-content *ngIf="!project.todos" layout="row" layout-align="center center" flex=100>
+          <md-card-content *ngIf="!project.todos.length" layout="row" layout-align="center center" flex=100>
             <h2>GO TO PLAY</h2>
           </md-card-content>
-          <md-list *ngIf="project.todos">
-            <template ngFor let-todo [ngForOf]="project.todos">
-            <md-list-item>
+          <md-list *ngIf="project.todos.length">
+            <md-list-item *ngFor="let todo of project.todos">
               <div layout="row" layout-align="start center" style="width: 100%;">
                 <div flex layout="row" layout-align="start center">
                   <md-checkbox [checked]="todo.finished">{{ todo.name }}</md-checkbox>
                   <span flex></span>
-                  <span flex=20>{{todo.deadline | date:'MMM d'}}</span>
+                  <span flex=30>{{todo.deadline | date:'MMM d'}}</span>
                 </div>
                 <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
                 <md-menu x-position="before" #menu="mdMenu">
-                  <button md-menu-item (click)="editTodo()"> Edit </button>
+                  <button md-menu-item (click)="editTodo(todo.id)"> Edit </button>
                   <button md-menu-item> Send </button>
                   <button md-menu-item> Delete </button>
                 </md-menu>
               </div>
             </md-list-item>
             <md-divider></md-divider>
-          </template>
           </md-list>
         </md-card>
 
@@ -71,14 +69,14 @@
           <md-divider></md-divider>
           <md-list>
             <template let-item let-last="last" ngFor [ngForOf]="project.issues">
-            <md-list-item>
-              <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
-              <h3 md-line> {{item.project}} </h3>
-              <h4 md-line> {{item.title}} </h4>
-              <p md-line> {{item.description}} </p>
-            </md-list-item>
-            <md-divider *ngIf="!last" md-inset></md-divider>
-          </template>
+              <md-list-item>
+                <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
+                <h3 md-line> {{item.project}} </h3>
+                <h4 md-line> {{item.title}} </h4>
+                <p md-line> {{item.description}} </p>
+              </md-list-item>
+              <md-divider *ngIf="!last" md-inset></md-divider>
+            </template>
           </md-list>
         </md-card>
       </div>
@@ -98,14 +96,14 @@
           </md-card-content>
           <md-list *ngIf="project.issues">
             <template let-item let-last="last" ngFor [ngForOf]="project.issues">
-            <md-list-item>
-              <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
-              <h3 md-line> {{item.project}} </h3>
-              <h4 md-line> {{item.title}} </h4>
-              <p md-line> {{item.description}} </p>
-            </md-list-item>
-            <md-divider *ngIf="!last" md-inset></md-divider>
-          </template>
+              <md-list-item>
+                <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
+                <h3 md-line> {{item.project}} </h3>
+                <h4 md-line> {{item.title}} </h4>
+                <p md-line> {{item.description}} </p>
+              </md-list-item>
+              <md-divider *ngIf="!last" md-inset></md-divider>
+            </template>
           </md-list>
         </md-card>
 
@@ -123,14 +121,14 @@
           </md-card-content>
           <md-list *ngIf="project.issues">
             <template let-item let-last="last" ngFor [ngForOf]="project.issues">
-            <md-list-item>
-              <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
-              <h3 md-line> {{item.project}} </h3>
-              <h4 md-line> {{item.title}} </h4>
-              <p md-line> {{item.description}} </p>
-            </md-list-item>
-            <md-divider *ngIf="!last" md-inset></md-divider>
-          </template>
+              <md-list-item>
+                <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
+                <h3 md-line> {{item.project}} </h3>
+                <h4 md-line> {{item.title}} </h4>
+                <p md-line> {{item.description}} </p>
+              </md-list-item>
+              <md-divider *ngIf="!last" md-inset></md-divider>
+            </template>
           </md-list>
         </md-card>
 

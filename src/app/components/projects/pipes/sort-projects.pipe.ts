@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Project } from './../project';
+import { Project } from './../classes/project';
 
 /**
  * Pipe que ordena los proyectos dependiendo el parametro que 

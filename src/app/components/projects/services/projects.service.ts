@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Project } from './../classes/project';
+import { Todo } from './../classes/todo';
 
 @Injectable()
 export class ProjectsService {
@@ -27,10 +28,8 @@ export class ProjectsService {
    * by id.
    * @returns Promise with the project.
    */
-  getProject(id: number) {
-    return this.projects.filter((p: Project) => {
-      return p.id === id;
-    })[0];
+  getProject(id: number): Project {
+    return this.projects.filter((p: Project) => p.id === id)[0];
   }
 
   /**
@@ -63,10 +62,12 @@ export class ProjectsService {
         });
       } else {
         this.projects = [
-          new Project(new Date().getTime(), 'ToolBot', '/home', 'Set of tools for help developers to manage, update, upgrade their projects and find help.', undefined, true),
-          new Project(new Date().getTime(), 'FlexboxLayout', '/home', 'Super flexbox layout', undefined, false),
-          new Project(new Date().getTime(), 'Angular 2', '/home', 'Hoolis', undefined, true),
-          new Project(new Date().getTime(), 'Vivatronica', '/home', 'Hoolis', undefined, true)
+          new Project(0, 'ToolBot', '/home', 
+          'Set of tools for help developers to manage, update, upgrade their projects and find help.', undefined, true,
+          [], [new Todo(new Date().getTime(), 'Lalalala', new Date())]),
+          new Project(1, 'FlexboxLayout', '/home', 'Super flexbox layout', undefined, false),
+          new Project(2, 'Angular 2', '/home', 'Hoolis', undefined, true),
+          new Project(3, 'Vivatronica', '/home', 'Hoolis', undefined, true)
         ]
         resolve(this.projects);
       }
@@ -92,8 +93,8 @@ export class ProjectsService {
    * @param id The project to delete
    */
   deleteProject(id: number): boolean {
-    let p = this.getProject(id);
-    const index = this.projects.indexOf(p);
+    const project = this.getProject(id);
+    const index = this.projects.indexOf(project);
     if (index > -1) {
       this.projects.splice(index, 1);
       jetpack.write(`${this.base}/projects.json`, this.projects, {

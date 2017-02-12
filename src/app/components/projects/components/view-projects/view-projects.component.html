@@ -26,7 +26,7 @@
   <!--Content-->
   <div layout="row" layout-align="center">
     <div layout="row" flex=70 flex-md=100 layout-wrap>
-      <div *ngIf="!projects" class="loading" layout="column" layout-align="center center">
+      <div *ngIf="!projects" class="loading" layout="column" flex layout-align="center center">
         <md-progress-spinner mode="indeterminate"></md-progress-spinner>
       </div>
       <div *ngIf="projects" flex=100 layout="row" layout-wrap class="projects" [ngClass]="listViewActive ? 'list' : 'box'">

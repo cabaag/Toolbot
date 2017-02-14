@@ -41,14 +41,16 @@
           <md-list *ngIf="project.todos.length">
             <md-list-item *ngFor="let todo of project.todos">
               <div layout="row" layout-align="start center" style="width: 100%;">
-                <div flex layout="row" layout-align="start center">
-                  <md-checkbox [checked]="todo.finished">{{ todo.name }}</md-checkbox>
-                  <span flex></span>
-                  <span flex=30>{{todo.deadline | date:'MMM d'}}</span>
+                <div flex=90 layout="row" layout-align="space-between center">
+                  <md-checkbox flex=70 [checked]="todo.finished" class="text-truncate">
+                    <span class="text-truncate">{{ todo.name }}</span>
+                  </md-checkbox>
+                  <!--<span flex=10></span>-->
+                  <span flex=20>{{todo.deadline | date:'MMM d'}}</span>
                 </div>
                 <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
                 <md-menu x-position="before" #menu="mdMenu">
-                  <button md-menu-item (click)="editTodo(todo.id)"> Edit </button>
+                  <button md-menu-item (click)="editTodo(todo)"> Edit </button>
                   <button md-menu-item> Send </button>
                   <button md-menu-item> Delete </button>
                 </md-menu>

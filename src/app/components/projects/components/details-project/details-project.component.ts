@@ -10,6 +10,7 @@ import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TdDialogService } from '@covalent/core';
 import { Todo } from './../../classes/todo';
+import { TodosService } from './../../services/todos.service';
 import { ViewContainerRef } from '@angular/core';
 
 @Component({
@@ -31,7 +32,8 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
     private _cookie: CookieService,
 
     // Own services
-    private _projects: ProjectsService
+    private _projects: ProjectsService,
+    private _todos: TodosService
   ) {
   }
 
@@ -79,15 +81,12 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
   /**
    * Creates a dialog for edit or create a todo task
    */
-  editTodo(id = -1): void {
+  editTodo(todo: Todo): void {
+    this._todos.setEditingTodo(this.project, todo || null);
     this._dialog.open(EditTodoComponent, {
       width: '450px',
       height: '450px',
     });
-    this._cookie.put('editingProject', this.project.id.toString());
-    if (id !== -1) {
-      this._cookie.put('editingTodo', id.toString());
-    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PriorityTodo, Todo } from './../../classes/todo';
 
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Project } from './../../classes/project';
 import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
+import { TodosService } from './../../services/todos.service';
 
 @Component({
   selector: 'app-edit-todo',
@@ -13,10 +14,10 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./edit-todo.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EditTodoComponent implements OnInit {
+export class EditTodoComponent implements OnInit, AfterViewInit {
   project: Project;
   todo: Todo;
-  todoTmp = { name: '' };
+  // @ViewChild('inputTitle') private inputTitle: ElementRef;
 
   priorities: any[] = [{
     value: PriorityTodo.NotUrgent,
@@ -34,21 +35,25 @@ export class EditTodoComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
+    private _cookie: CookieService,
+
+    // Own services
     private _projects: ProjectsService,
-    private _cookie: CookieService
+    private _todos: TodosService,
   ) {
-    this.project = this._projects.getProject(+this._cookie.get('editingProject'));
-    const idTodo = +this._cookie.get('editingTodo');
-    if (idTodo) {
-      this.todo = this.project.getTodo(idTodo);
-    } else {
-      this.todo = new Todo();
-    }
+    this.project = this._todos.editingProject;
+    this.todo = this._todos.editingTodo || new Todo();
     this._cookie.remove('editingProject');
     this._cookie.remove('editingTodo');
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    // let input = <HTMLInputElement> this.inputTitle.nativeElement;
+    // console.log(input);
+    // console.log(input.focus());
   }
 
   saveTodo() {
@@ -62,15 +67,6 @@ export class EditTodoComponent implements OnInit {
         this.todo.priority
       ));
     } 
-    // else {
-    //   this.project.updateTodo(new Todo(
-    //     this.todo.id,
-    //     this.todo.name,
-    //     this.todo.deadline,
-    //     false,
-    //     this.todo.priority
-    //   ));
-    // }
   }
 
 }

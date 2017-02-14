@@ -9,6 +9,8 @@ export class TodosService {
     new Todo(new Date().getTime(), 'Terminar ToolBot', new Date(), '', true),
     new Todo(new Date().getTime(), 'Terminar todos de home', new Date()),
   ];
+  editingTodo: Todo;
+  editingProject: Project;
 
   constructor(
     private _projects: ProjectsService
@@ -26,6 +28,12 @@ export class TodosService {
 
   getTodos(): Todo[] {
     return this.todos;
+  }
+
+  setEditingTodo(project: Project, todo: Todo) {
+    this.editingTodo = todo;
+    this.editingProject = project;
+
   }
 
 }

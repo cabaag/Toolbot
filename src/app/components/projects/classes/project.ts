@@ -20,6 +20,7 @@ export class Project {
   }
 
   getTodo(id: number): Todo {
+    console.log(this.todos);
     return this.todos.filter((todo: Todo) => todo.id === id)[0];
   }
 

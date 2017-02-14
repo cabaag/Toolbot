@@ -6,8 +6,8 @@
   <md-toolbar-row>
     <div layout="row" flex layout-margin>
       <md-input-container flex=85>
-        <input md-input placeholder="Title" autofocus 
-        [(ngModel)]="todo.name"
+        <input #inputTitle md-input placeholder="Title"
+        [(ngModel)]="todo.name" type="text"
         [ngModelOptions]="{standalone: true}"
         tabindex="1" required>
       </md-input-container>

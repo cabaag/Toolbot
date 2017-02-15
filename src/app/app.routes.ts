@@ -3,20 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { HomeComponent } from './components/home/home.component';
 import { IssuesService } from './services/issues.service';
-import { ProjectsComponent } from './components/projects/projects.component';
 import { ResourcesService } from './services/resources.service';
+import { StoreComponent } from './modules/store/store.component';
 
 const routes: Routes = [{
-    component: HomeComponent,
     path: '',
+    component: HomeComponent,
   },
   // {
   //   component: GitComponent,
   //   path: 'git',
-  // }, {
-  //   component: StoreComponent,
-  //   path: 'store',
-  // }
+  {
+    path: 'store',
+    component: StoreComponent,
+  }
 ];
 
 export const appRoutingProviders: any[] = [

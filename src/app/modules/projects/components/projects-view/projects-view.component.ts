@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { CreateProjectComponent } from './../create-project/create-project.component';
 import { FilterProjectsPipe } from './../../pipes/filter-projects.pipe';
 import { MdDialog } from '@angular/material';
 import { Project } from './../../classes/project';
+import { ProjectCreateComponent } from './../project-create/project-create.component';
 import { ProjectsService } from './../../services/projects.service';
 import { Router } from '@angular/router';
 import { SortProjectsPipe } from './../../pipes/sort-projects.pipe';
 import { Subscription } from 'rxjs/Subscription';
-import { element } from 'protractor';
 
 if (electron) {
   const dialog = electron.remote.dialog;
@@ -17,12 +16,12 @@ if (electron) {
 enum sorting { DEFAULT, NAME };
 
 @Component({
-  selector: 'app-view-projects',
-  templateUrl: './view-projects.component.html',
-  styleUrls: ['./view-projects.component.scss'],
+  selector: 'app-projects-view',
+  templateUrl: './projects-view.component.html',
+  styleUrls: ['./projects-view.component.scss'],
 })
-export class ViewProjectsComponent {
-  listViewActive: boolean = true;
+export class ProjectsViewComponent {
+  listViewActive = true;
   subscriptionProjects: Subscription;
   projects: Project[];
   private sortBy: number = sorting.DEFAULT;
@@ -63,9 +62,9 @@ export class ViewProjectsComponent {
    * or template project.
    */
   openCreateProjectDialog(): void {
-    this._dialog.open(CreateProjectComponent, {
+    this._dialog.open(ProjectCreateComponent, {
       width: '450px',
-      height: '630px',
+      height: '540px',
     });
   }
 

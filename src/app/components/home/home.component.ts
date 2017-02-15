@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IssuesService } from './../../services/issues.service';
-import { Project } from './../projects/classes/project';
-import { ProjectsService } from './../projects/services/projects.service';
+import { Project } from './../../modules/projects/classes/project';
+import { ProjectsService } from './../../modules/projects/services/projects.service';
 import { ResourcesService } from './../../services/resources.service';
 import { Subscription } from 'rxjs/Subscription';
-import { Todo } from './../projects/classes/todo';
-import { TodosService } from './../projects/services/todos.service';
-
+import { Todo } from './../../modules/projects/classes/todo';
+import { TodosService } from './../../modules/projects/services/todos.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

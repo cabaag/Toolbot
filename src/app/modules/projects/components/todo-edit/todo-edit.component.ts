@@ -9,12 +9,12 @@ import { Subscription } from 'rxjs/Subscription';
 import { TodosService } from './../../services/todos.service';
 
 @Component({
-  selector: 'app-edit-todo',
-  templateUrl: './edit-todo.component.html',
-  styleUrls: ['./edit-todo.component.scss'],
+  selector: 'app-todo-edit',
+  templateUrl: './todo-edit.component.html',
+  styleUrls: ['./todo-edit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EditTodoComponent implements OnInit, AfterViewInit {
+export class TodoEditComponent implements OnInit, AfterViewInit {
   project: Project;
   todo: Todo;
   // @ViewChild('inputTitle') private inputTitle: ElementRef;

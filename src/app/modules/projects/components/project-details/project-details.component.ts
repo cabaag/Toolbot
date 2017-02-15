@@ -2,23 +2,23 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { EditTodoComponent } from './../edit-todo/edit-todo.component';
 import { Location } from '@angular/common';
 import { MdDialog } from '@angular/material';
-import { Project } from './../../classes/project';
+import { Project } from './../../../../components/projects/classes/project';
 import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TdDialogService } from '@covalent/core';
-import { Todo } from './../../classes/todo';
+import { Todo } from './../../../../components/projects/classes/todo';
+import { TodoEditComponent } from './../todo-edit/todo-edit.component';
 import { TodosService } from './../../services/todos.service';
 import { ViewContainerRef } from '@angular/core';
 
 @Component({
-  selector: 'app-details-project',
-  templateUrl: './details-project.component.html',
-  styleUrls: ['./details-project.component.scss']
+  selector: 'app-project-details',
+  templateUrl: './project-details.component.html',
+  styleUrls: ['./project-details.component.scss']
 })
-export class DetailsProjectComponent implements OnInit, OnDestroy {
+export class ProjectDetailsComponent implements OnInit, OnDestroy {
   sub: Subscription;
   project: Project;
 
@@ -83,7 +83,7 @@ export class DetailsProjectComponent implements OnInit, OnDestroy {
    */
   editTodo(todo: Todo): void {
     this._todos.setEditingTodo(this.project, todo || null);
-    this._dialog.open(EditTodoComponent, {
+    this._dialog.open(TodoEditComponent, {
       width: '450px',
       height: '450px',
     });

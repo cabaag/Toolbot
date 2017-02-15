@@ -1,9 +1,7 @@
-import { projectComponents, projectPipes, projectProviders, projectRoutes } from './project.routes';
+import { storeComponents, storePipes, storeProviders, storeRoutes } from './store.routes';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { CovalentCoreModule } from '@covalent/core';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
-import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -11,25 +9,21 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    projectComponents,
-    CreateProjectComponent,
-    projectPipes,
-    EditTodoComponent,
+    storeComponents,
+    storePipes,
   ],
   // directives, components, and pipes owned by this NgModule
   imports: [
     BrowserModule,
     RouterModule,
     CovalentCoreModule.forRoot(),
-    projectRoutes
+    storeRoutes
   ],
   // modules needed to run this module
   providers: [
-    projectProviders
+    storeProviders
   ],
   entryComponents: [
-    CreateProjectComponent,
-    EditTodoComponent
   ],
 })
-export class ProjectModule { }
+export class StoreModule { }

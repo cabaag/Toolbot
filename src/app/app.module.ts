@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
-import { ProjectModule } from './components/projects/project.module';
+import { ProjectModule } from './modules/projects/projects.module';
+import { StoreModule } from './modules/store/store.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,9 @@ import { ProjectModule } from './components/projects/project.module';
     BrowserModule,
     CovalentCoreModule.forRoot(),
     CovalentDialogsModule.forRoot(),
-    ProjectModule,
     appRoutes,
+    ProjectModule,
+    StoreModule,
   ], // modules needed to run this module
   providers: [
     appRoutingProviders,

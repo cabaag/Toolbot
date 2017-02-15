@@ -4,13 +4,13 @@ import { Project } from './../../classes/project';
 import { ProjectsService } from './../../services/projects.service';
 
 @Component({
-  selector: 'app-create-project',
-  templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.scss']
+  selector: 'app-project-create',
+  templateUrl: './project-create.component.html',
+  styleUrls: ['./project-create.component.scss']
 })
-export class CreateProjectComponent implements OnInit {
+export class ProjectCreateComponent implements OnInit {
   private electronEnabled: boolean = electron ? true : false;
-  project: { path: string, image: string, name: string, description: string };
+  project: Project = new Project(new Date().getTime(), '', '', '');
   managers = [
     { name: 'Git' },
     { name: 'NPM' },

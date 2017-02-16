@@ -9,10 +9,6 @@ import { Router } from '@angular/router';
 import { SortProjectsPipe } from './../../pipes/sort-projects.pipe';
 import { Subscription } from 'rxjs/Subscription';
 
-if (electron) {
-  const dialog = electron.remote.dialog;
-}
-
 enum sorting { DEFAULT, NAME };
 
 @Component({
@@ -45,7 +41,7 @@ export class ProjectsViewComponent {
    */
   changeView(view: string): void {
     this.listViewActive = view === 'list';
-    this._cookieService.put('activeView', view);
+    this._cookieService.put('projectsActiveView', view);
   }
 
   /**
@@ -53,7 +49,7 @@ export class ProjectsViewComponent {
    * @returns If projects will be view as list or boxes.
    */
   private getViewPreferences(): boolean {
-    const view = this._cookieService.get('activeView');
+    const view = this._cookieService.get('projectsActiveView');
     return view === 'list';
   }
 

@@ -21,7 +21,7 @@ export class TodosService {
   init() {
     this._projects.getProjects().then((projects: Project[]) => {
       projects.forEach((p: Project) => {
-        this.todos = this.todos.concat(p.getTodos());
+        this.todos = this.todos.concat(p.todos);
       });
     });
   }

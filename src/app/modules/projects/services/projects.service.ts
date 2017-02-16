@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Project } from './../classes/project';
 import { Todo } from './../classes/todo';
+import { projects } from './projects.mocks';
 
 @Injectable()
 export class ProjectsService {
@@ -61,14 +62,7 @@ export class ProjectsService {
           resolve(this.projects);
         });
       } else {
-        this.projects = [
-          new Project(0, 'ToolBot', '/home', 
-          'Set of tools for help developers to manage, update, upgrade their projects and find help.', undefined, true,
-          [], [new Todo(new Date().getTime(), 'Lalalala', new Date())]),
-          new Project(1, 'FlexboxLayout', '/home', 'Super flexbox layout', undefined, false),
-          new Project(2, 'Angular 2', '/home', 'Hoolis', undefined, true),
-          new Project(3, 'Vivatronica', '/home', 'Hoolis', undefined, true)
-        ]
+        this.projects = projects;
         resolve(this.projects);
       }
     });

@@ -4,11 +4,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Location } from '@angular/common';
 import { MdDialog } from '@angular/material';
-import { Project } from './../../../../components/projects/classes/project';
+import { Project } from './../../classes/project';
 import { ProjectsService } from './../../services/projects.service';
 import { Subscription } from 'rxjs/Subscription';
 import { TdDialogService } from '@covalent/core';
-import { Todo } from './../../../../components/projects/classes/todo';
+import { Todo } from './../../classes/todo';
 import { TodoEditComponent } from './../todo-edit/todo-edit.component';
 import { TodosService } from './../../services/todos.service';
 import { ViewContainerRef } from '@angular/core';
@@ -73,7 +73,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   }
 
   todosPending(): number {
-    return this.project.todos.filter((todo: Todo)=> {
+    return this.project.todos.filter((todo: Todo) => {
       return !todo.finished;
     }).length;
   }

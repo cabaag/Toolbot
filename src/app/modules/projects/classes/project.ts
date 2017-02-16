@@ -1,4 +1,6 @@
+import { Command } from './command';
 import { Todo } from './todo';
+
 export class Project {
 
   constructor(
@@ -9,7 +11,8 @@ export class Project {
     public image: string = undefined,
     public star = false,
     public keywords: string[] = [],
-    public todos: Todo[] = []
+    public todos: Todo[] = [],
+    public commands: Command[] = []
   ) { }
 
   /**

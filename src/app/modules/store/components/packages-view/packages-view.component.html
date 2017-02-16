@@ -1,3 +1,60 @@
-<p>
-  packages-view works!
-</p>
+<td-layout-nav logo="assets:toolbot">
+  <!--Toolbar content-->
+  <div td-toolbar-content layout="row" layout-align="start center" flex>
+    <span>Store</span>
+    <span flex></span>
+    <td-search-box flex placeholder="Search" backIcon="arrow_forward" (searchDebounce)="searchInputTerm = $event"></td-search-box>
+    <button *ngIf="!listViewActive" md-button class="md-icon-button" (click)="changeView('list')">
+      <md-icon class="md-24">list</md-icon>
+    </button>
+    <button *ngIf="listViewActive" md-button class="md-icon-button" (click)="changeView('box')">
+      <md-icon class="md-24">view_comfy</md-icon>
+    </button>
+  </div>
+
+  <!--Content-->
+  <div layout="row" layout-align="center">
+    <div layout="row" flex=70 flex-md=100 layout-wrap>
+      <div *ngIf="!packages" class="loading" layout="column" flex layout-align="center center">
+        <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+      </div>
+
+      <div *ngIf="packages" flex=100 layout="row" layout-wrap class="packages" [ngClass]="listViewActive ? 'list' : 'box'">
+        <div class="package" [attr.flex]="listViewActive === true ? 100 : 33" *ngFor="let package of packages">
+          <md-card layout="column" (click)="goTopackage($event, package.id)">
+
+            <md-card-title layout layout-align="center center">
+              <span flex>{{package.name}}</span>
+            </md-card-title>
+
+            <md-card-content flex>
+              {{package.description}}
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="space-around">
+              <button md-button>
+                <md-icon>assignment</md-icon>
+                <span>{{package.repo}}</span>
+              </button>
+              <button md-button>
+                <md-icon>bug_report</md-icon>
+                <span>{{package.version}}</span>
+              </button>
+              <button md-button>
+                <md-icon>star</md-icon>
+                <span>{{package.downloaded ? package.downloaded : 0}}</span>
+              </button>
+            </md-card-actions>
+
+          </md-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Footer-->
+  <td-layout-footer>
+    Help
+  </td-layout-footer>
+</td-layout-nav>

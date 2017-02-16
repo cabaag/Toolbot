@@ -36,7 +36,7 @@
           <md-card-subtitle>{{todosPending()}} todos pending...</md-card-subtitle>
           <md-divider></md-divider>
           <md-card-content *ngIf="!project.todos.length" layout="row" layout-align="center center" flex=100>
-            <h2>GO TO PLAY</h2>
+            <h2>WATCH NETFLIX</h2>
           </md-card-content>
           <md-list *ngIf="project.todos.length">
             <md-list-item *ngFor="let todo of project.todos">
@@ -69,16 +69,15 @@
           </md-card-title>
           <md-card-subtitle>Commands to run as a terminal.</md-card-subtitle>
           <md-divider></md-divider>
-          <md-list>
-            <template let-item let-last="last" ngFor [ngForOf]="project.issues">
-              <md-list-item>
-                <md-icon md-list-avatar svgIcon="assets:toolbot"></md-icon>
-                <h3 md-line> {{item.project}} </h3>
-                <h4 md-line> {{item.title}} </h4>
-                <p md-line> {{item.description}} </p>
-              </md-list-item>
-              <md-divider *ngIf="!last" md-inset></md-divider>
-            </template>
+          <md-card-content *ngIf="!project.commands" layout="row" layout-align="center center" flex=100>
+            <h2>NEED COMMANDS, MASTER</h2>
+          </md-card-content>
+          <md-list *ngIf="project.commands">
+            <md-list-item *ngFor="let command of project.commands">
+              <h3 md-line> {{command.name}} </h3>
+              <button md-icon-button><md-icon>play_arrow</md-icon></button>
+              <button md-icon-button><md-icon>delete</md-icon></button>
+            </md-list-item>
           </md-list>
         </md-card>
       </div>

@@ -16,7 +16,7 @@
       <md-icon>create_new_folder</md-icon>
       <span>Create project</span>
     </button>
-    <button md-menu-item (click)="selectDirectory()">
+      <button md-menu-item (click)="selectDirectory()">
       <md-icon>add</md-icon>
       <span>Add existing project</span>
     </button>
@@ -30,8 +30,7 @@
         <md-progress-spinner mode="indeterminate"></md-progress-spinner>
       </div>
       <div *ngIf="projects" flex=100 layout="row" layout-wrap class="projects" [ngClass]="listViewActive ? 'list' : 'box'">
-        <div class="project" [attr.flex]="listViewActive === true ? 100 : 33" 
-          *ngFor="let project of projects | sortProjects: orderBy | filterProjects: searchInputTerm">
+        <div class="project" [attr.flex]="listViewActive === true ? 100 : 33" *ngFor="let project of projects | sortProjects: orderBy | filterProjects: searchInputTerm">
           <md-card layout="column" (click)="goToProject($event, project.id)">
 
             <md-card-title layout layout-align="center center">
@@ -59,11 +58,11 @@
                 <span>{{project.bugs ? project.bugs : 0}}</span>
               </button>
             </md-card-actions>
-            
+
           </md-card>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <!--Footer-->

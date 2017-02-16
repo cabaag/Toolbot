@@ -34,10 +34,14 @@ export class AppComponent {
     title: 'Settings',
   }];
 
-  constructor(private _iconRegistry: MdIconRegistry,
+  constructor(
+    private _iconRegistry: MdIconRegistry,
     private _domSanitizer: DomSanitizer,
-    viewContainerRef: ViewContainerRef) {
-    this._iconRegistry.addSvgIconInNamespace('assets', 'toolbot',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/github.svg'));
+    viewContainerRef: ViewContainerRef
+  ) {
+    this._iconRegistry.addSvgIconInNamespace('assets', 'toolbot', 
+    this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/toolbot.svg'));
+    this._iconRegistry.addSvgIconInNamespace('assets', 'toolbot_white',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/toolbot_white.svg'));
   }
 }

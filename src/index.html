@@ -7,15 +7,21 @@
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="../assets/ico/favicon.ico">
+  <style>
+    .loader {
+      padding: 20%;
+      text-align: center;
+    }
+  </style>
   <script src="/electron-load.js"></script>
 </head>
 
 <body>
   <app-toolbot>
-    <div style="padding: 20%;text-align:center;">
-      <img src="../assets/icons/covalent.svg" width="100">
-      <h3>ToolBot Loading...</h3>
+    <div class="loader">
+      <img src="../assets/icons/toolbot.svg" width="128">
+      <h3>ToolBot loading...</h3>
     </div>
   </app-toolbot>
 </body>

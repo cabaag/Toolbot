@@ -52,29 +52,29 @@
       <div flex=60>
         <md-card class="todos-card">
           <md-card-title>Todos</md-card-title>
-          <!--<td-search-box placeholder="Search" [alwaysVisible]="true"></td-search-box>-->
+          <md-card-subtitle>First five critical todos</md-card-subtitle>
           <md-divider></md-divider>
           <md-list>
-            <template ngFor let-todo [ngForOf]="todos">
-            <md-list-item>
-              <div layout="row" layout-align="start center" style="width: 100%;">
-                <div flex layout="row" layout-align="start center">
-                  <md-checkbox [checked]="todo.finished">
-                    {{ todo.name }}
-                  </md-checkbox>
-                  <span flex></span>
-                  <span flex=20>{{todo.deadline | date:'MMM d'}}</span>
+            <template ngFor let-todo let-i="index" [ngForOf]="todos">
+              <md-list-item *ngIf="i < 5">
+                <div layout="row" layout-align="start center" style="width: 100%;">
+                  <div flex layout="row" layout-align="start center">
+                    <md-checkbox [checked]="todo.finished">
+                      {{ todo.name }}
+                    </md-checkbox>
+                    <span flex></span>
+                    <span flex=20>{{todo.deadline | date:'MMM d'}}</span>
+                  </div>
+                  <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
+                  <md-menu x-position="before" #menu="mdMenu">
+                    <button md-menu-item> Go to </button>
+                    <button md-menu-item> Send </button>
+                    <button md-menu-item> Delete </button>
+                  </md-menu>
                 </div>
-                <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
-                <md-menu x-position="before" #menu="mdMenu">
-                  <button md-menu-item> Go to </button>
-                  <button md-menu-item> Send </button>
-                  <button md-menu-item> Delete </button>
-                </md-menu>
-              </div>
-            </md-list-item>
-            <md-divider></md-divider>
-          </template>
+              </md-list-item>
+              <md-divider *ngIf="i < 5"></md-divider>
+            </template>
           </md-list>
         </md-card>
 
